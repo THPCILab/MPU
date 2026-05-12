@@ -1,6 +1,6 @@
-# MPU: Fine-Grained Sharing in Multi-Task Photonic Neural Networks
+# MPU: Task-Aware Neuron-Sharing Photonic Neural Network
 
-This repository studies how a fixed, passive **meta processing unit (MPU)** can replace selected 2-to-2 MZI neurons in a multi-task photonic neural network while retaining classification accuracy.
+This work studies how a fixed, passive **meta processing unit (MPU)** can replace selected 2-to-2 MZI neurons in a multi-task photonic neural network while retaining classification accuracy.This open-source repository serves as supporting documentation for the paper “Inverse-designed meta processing units for multi-task near-field photonic computing” (submitted to *Nature Photonics*).
 
 The final setting is intentionally minimal: EMNIST ByClass is projected to 64 PCA features, passed through one complex 64-to-64 Clements mesh, detected once by square-law intensity readout, normalized by shared LayerNorm + GELU, and classified by task-specific heads.
 
