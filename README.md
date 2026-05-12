@@ -25,8 +25,8 @@ At 90% MPU sharing, the learned neuron-level replacement pattern retains substan
 │   └── export_figure_data.py      # Export figure source data as .mat files
 ├── scripts/
 │   ├── run_local_medium.cmd       # Small Windows sanity run
-│   ├── run_3090_fine10_reuse_warmup.sh
-│   └── run_4090_7gpu.sh
+│   ├── run_main_10pct_sweep_reuse_warmup.sh
+│   └── run_replicate_20pct_sweep.sh
 ├── data/                          # Final JSON data used for figures
 ├── results/                       # Publication figures
 ├── paper_data/                    # Figure source data in MATLAB format
@@ -56,10 +56,10 @@ Run a compact local sanity experiment on Windows:
 scripts\run_local_medium.cmd
 ```
 
-Run the full fine 10%-step 3090 reproduction:
+Run the full 10%-step main sweep:
 
 ```bash
-bash scripts/run_3090_fine10_reuse_warmup.sh
+bash scripts/run_main_10pct_sweep_reuse_warmup.sh
 ```
 
 ## Method Summary

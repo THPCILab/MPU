@@ -126,8 +126,8 @@ confusion matrices
 The full warmup curves are stored in:
 
 ```text
-results_v27_3090/v27_3090_4gpu_single_mesh_stage_refine_seed44_warmup.json
-results_v27_4090/v27_4090_7gpu_single_mesh_stage_refine_seed43_warmup.json
+data/warmup_main.json
+data/warmup_replicate.json
 ```
 
 ## 7. Sharing Pattern Search
@@ -380,7 +380,7 @@ At 0% and 100%, Neuron-level and layer-level strategies are equivalent because t
 
 ## 11. Main Result
 
-The final main curve uses the 3090 fine 10%-step sweep:
+The final main curve uses the 10%-step main sweep:
 
 ```text
 shared ratio: 0, 10, 20, ..., 100%
@@ -442,8 +442,8 @@ run_main_freeze_ratio_experiment.py
 Main server scripts:
 
 ```text
-scripts/server_run_v27_3090_4gpu_single_mesh_stage_refine_fine10_reuse_warmup.sh
-scripts/server_run_v27_4090_7gpu_single_mesh_stage_refine.sh
+scripts/run_main_10pct_sweep_reuse_warmup.sh
+scripts/run_replicate_20pct_sweep.sh
 ```
 
 Plotting and data export:
@@ -457,8 +457,8 @@ export_v27_nature_figure_data.py
 Main result data:
 
 ```text
-results_v27_3090/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json
-results_v27_3090/v27_3090_4gpu_single_mesh_stage_refine_seed44_warmup.json
+data/main_10pct_sweep.json
+data/warmup_main.json
 ```
 
 Figure data package:
@@ -466,3 +466,4 @@ Figure data package:
 ```text
 paper_data_v27_nature_figures/
 ```
+

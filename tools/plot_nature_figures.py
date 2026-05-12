@@ -9,7 +9,7 @@ from matplotlib.colors import BoundaryNorm, ListedColormap
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = "data/v27_3090_fine10_merged.json"
+DEFAULT_INPUT = "data/main_10pct_sweep.json"
 
 NODE = "#6F3FB5" #
 LAYER = "#2F5597"
@@ -38,7 +38,7 @@ def configure():
 
 
 def load_payload(path):
-    with Path(path).open("r", encoding="utf-8") as f:
+    with Path(path).open("r", encoding="utf-8-sig") as f:
         return json.load(f)
 
 
@@ -51,8 +51,8 @@ def condition(payload, name="eta_off"):
 
 def load_external_warmup_result():
     candidates = [
-        ROOT / "data" / "v27_3090_warmup.json",
-        ROOT / "data" / "v27_4090_warmup.json",
+        ROOT / "data" / "warmup_main.json",
+        ROOT / "data" / "warmup_replicate.json",
     ]
     for path in candidates:
         if not path.exists():

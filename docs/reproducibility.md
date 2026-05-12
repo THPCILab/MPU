@@ -1,15 +1,15 @@
-# Reproducibility Notes
+﻿# Reproducibility Notes
 
 ## Final Figure Data
 
 The final paper figures are generated from:
 
-- `data/v27_3090_fine10_merged.json`: 10%-step accuracy, masks, confusion matrices, and fine-tuning histories.
-- `data/v27_3090_warmup.json`: full warmup histories for the seed-44 3090 run.
-- `data/v27_4090_merged.json`: independent 20%-step confirmation run.
-- `data/v27_4090_warmup.json`: full warmup histories for the seed-43 4090 run.
+- `data/main_10pct_sweep.json`: 10%-step accuracy, masks, confusion matrices, and fine-tuning histories.
+- `data/warmup_main.json`: full warmup histories for the main warmup run.
+- `data/replicate_20pct_sweep.json`: independent 20%-step confirmation run.
+- `data/warmup_replicate.json`: full warmup histories for the replicate warmup run.
 
-The key reported number is read from the 3090 fine-grid result:
+The key reported number is read from the main 10%-step sweep:
 
 - 90% neuron-level sharing: 87.64% average test accuracy.
 - 90% layer-level sharing: 80.38% average test accuracy.
@@ -31,16 +31,17 @@ For a quick local sanity check:
 scripts\run_local_medium.cmd
 ```
 
-For the 3090 fine 10%-step result, first produce or keep the warmup checkpoint expected by the script, then run:
+For the main 10%-step result, first produce or keep the warmup checkpoint expected by the script, then run:
 
 ```bash
-bash scripts/run_3090_fine10_reuse_warmup.sh
+bash scripts/run_main_10pct_sweep_reuse_warmup.sh
 ```
 
-For the 4090 7-GPU confirmation run:
+For an independent 20%-step confirmation run:
 
 ```bash
-bash scripts/run_4090_7gpu.sh
+bash scripts/run_replicate_20pct_sweep.sh
 ```
 
 The training script saves JSON histories, masks, confusion matrices, and checkpoints when the corresponding `--save-*` flags are enabled.
+

@@ -1,15 +1,15 @@
-{
+﻿{
   "settings": {
     "preset": "main",
-    "output": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_shards/boundary_r0-100.json",
+    "output": "results/main_10pct_single_mesh_sweep_shards/boundary_r0-100.json",
     "task_set": "three",
     "seed": 44,
     "download": false,
     "cpu": false,
     "require_cuda": true,
     "resume": false,
-    "checkpoint_dir": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt",
-    "warmup_checkpoint": "results/v27_3090_4gpu_single_mesh_stage_refine_seed44_ckpt/shared_warmup.pt",
+    "checkpoint_dir": "results/main_10pct_single_mesh_sweep_ckpt",
+    "warmup_checkpoint": "results/warmup_main_ckpt/shared_warmup.pt",
     "warmup_only": false,
     "ratios": [
       0.0,
@@ -11780,7 +11780,7 @@
           }
         },
         "boundary": "private_0pct",
-        "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/boundary_r0-100_eta_off_boundary_r000_final.pt"
+        "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/boundary_r0-100_eta_off_boundary_r000_final.pt"
       },
       "curves": {
         "0.00": {
@@ -17940,7 +17940,7 @@
               }
             },
             "boundary": "private_0pct",
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/boundary_r0-100_eta_off_boundary_r000_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/boundary_r0-100_eta_off_boundary_r000_final.pt"
           },
           "clements_layer": {
             "mean_hist": [
@@ -24098,7 +24098,7 @@
               }
             },
             "boundary": "private_0pct",
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/boundary_r0-100_eta_off_boundary_r000_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/boundary_r0-100_eta_off_boundary_r000_final.pt"
           }
         },
         "1.00": {
@@ -30258,7 +30258,7 @@
               }
             },
             "boundary": "shared_100pct",
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/boundary_r0-100_eta_off_boundary_r100_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/boundary_r0-100_eta_off_boundary_r100_final.pt"
           },
           "clements_layer": {
             "mean_hist": [
@@ -36416,7 +36416,7 @@
               }
             },
             "boundary": "shared_100pct",
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/boundary_r0-100_eta_off_boundary_r100_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/boundary_r0-100_eta_off_boundary_r100_final.pt"
           }
         },
         "0.50": {
@@ -42575,7 +42575,7 @@
                 "accuracy": 0.845
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/layer_hi_r50-60-70-80-90_eta_off_clements_layer_r050_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/layer_hi_r50-60-70-80-90_eta_off_clements_layer_r050_final.pt"
           },
           "node_pruning": {
             "mean_hist": [
@@ -48732,7 +48732,7 @@
                 "accuracy": 0.864
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/node_lo_r10-20-30-40-50_eta_off_node_pruning_r050_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/node_lo_r10-20-30-40-50_eta_off_node_pruning_r050_final.pt"
           }
         },
         "0.60": {
@@ -54891,7 +54891,7 @@
                 "accuracy": 0.8406666666666667
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/layer_hi_r50-60-70-80-90_eta_off_clements_layer_r060_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/layer_hi_r50-60-70-80-90_eta_off_clements_layer_r060_final.pt"
           },
           "node_pruning": {
             "mean_hist": [
@@ -61048,7 +61048,7 @@
                 "accuracy": 0.8645
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/node_hi_r60-70-80-90_eta_off_node_pruning_r060_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/node_hi_r60-70-80-90_eta_off_node_pruning_r060_final.pt"
           }
         },
         "0.70": {
@@ -67207,7 +67207,7 @@
                 "accuracy": 0.8175
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/layer_hi_r50-60-70-80-90_eta_off_clements_layer_r070_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/layer_hi_r50-60-70-80-90_eta_off_clements_layer_r070_final.pt"
           },
           "node_pruning": {
             "mean_hist": [
@@ -73364,7 +73364,7 @@
                 "accuracy": 0.8588333333333333
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/node_hi_r60-70-80-90_eta_off_node_pruning_r070_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/node_hi_r60-70-80-90_eta_off_node_pruning_r070_final.pt"
           }
         },
         "0.80": {
@@ -79523,7 +79523,7 @@
                 "accuracy": 0.7863333333333333
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/layer_hi_r50-60-70-80-90_eta_off_clements_layer_r080_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/layer_hi_r50-60-70-80-90_eta_off_clements_layer_r080_final.pt"
           },
           "node_pruning": {
             "mean_hist": [
@@ -85680,7 +85680,7 @@
                 "accuracy": 0.8499166666666667
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/node_hi_r60-70-80-90_eta_off_node_pruning_r080_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/node_hi_r60-70-80-90_eta_off_node_pruning_r080_final.pt"
           }
         },
         "0.90": {
@@ -91839,7 +91839,7 @@
                 "accuracy": 0.7648333333333334
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/layer_hi_r50-60-70-80-90_eta_off_clements_layer_r090_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/layer_hi_r50-60-70-80-90_eta_off_clements_layer_r090_final.pt"
           },
           "node_pruning": {
             "mean_hist": [
@@ -97996,7 +97996,7 @@
                 "accuracy": 0.83625
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/node_hi_r60-70-80-90_eta_off_node_pruning_r090_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/node_hi_r60-70-80-90_eta_off_node_pruning_r090_final.pt"
           }
         },
         "0.10": {
@@ -104155,7 +104155,7 @@
                 "accuracy": 0.8648333333333333
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/layer_lo_r10-20-30-40_eta_off_clements_layer_r010_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/layer_lo_r10-20-30-40_eta_off_clements_layer_r010_final.pt"
           },
           "node_pruning": {
             "mean_hist": [
@@ -110312,7 +110312,7 @@
                 "accuracy": 0.8665833333333334
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/node_lo_r10-20-30-40-50_eta_off_node_pruning_r010_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/node_lo_r10-20-30-40-50_eta_off_node_pruning_r010_final.pt"
           }
         },
         "0.20": {
@@ -116471,7 +116471,7 @@
                 "accuracy": 0.8631666666666666
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/layer_lo_r10-20-30-40_eta_off_clements_layer_r020_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/layer_lo_r10-20-30-40_eta_off_clements_layer_r020_final.pt"
           },
           "node_pruning": {
             "mean_hist": [
@@ -122628,7 +122628,7 @@
                 "accuracy": 0.865
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/node_lo_r10-20-30-40-50_eta_off_node_pruning_r020_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/node_lo_r10-20-30-40-50_eta_off_node_pruning_r020_final.pt"
           }
         },
         "0.30": {
@@ -128787,7 +128787,7 @@
                 "accuracy": 0.8616666666666667
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/layer_lo_r10-20-30-40_eta_off_clements_layer_r030_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/layer_lo_r10-20-30-40_eta_off_clements_layer_r030_final.pt"
           },
           "node_pruning": {
             "mean_hist": [
@@ -134944,7 +134944,7 @@
                 "accuracy": 0.86625
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/node_lo_r10-20-30-40-50_eta_off_node_pruning_r030_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/node_lo_r10-20-30-40-50_eta_off_node_pruning_r030_final.pt"
           }
         },
         "0.40": {
@@ -141103,7 +141103,7 @@
                 "accuracy": 0.8555833333333334
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/layer_lo_r10-20-30-40_eta_off_clements_layer_r040_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/layer_lo_r10-20-30-40_eta_off_clements_layer_r040_final.pt"
           },
           "node_pruning": {
             "mean_hist": [
@@ -147260,7 +147260,7 @@
                 "accuracy": 0.866
               }
             },
-            "checkpoint_path": "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_ckpt/node_lo_r10-20-30-40-50_eta_off_node_pruning_r040_final.pt"
+            "checkpoint_path": "results/main_10pct_single_mesh_sweep_ckpt/node_lo_r10-20-30-40-50_eta_off_node_pruning_r040_final.pt"
           }
         }
       },
@@ -147286,10 +147286,10 @@
     }
   },
   "merged_sources": [
-    "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_shards/boundary_r0-100.json",
-    "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_shards/layer_hi_r50-60-70-80-90.json",
-    "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_shards/layer_lo_r10-20-30-40.json",
-    "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_shards/node_hi_r60-70-80-90.json",
-    "results/v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_shards/node_lo_r10-20-30-40-50.json"
+    "results/main_10pct_single_mesh_sweep_shards/boundary_r0-100.json",
+    "results/main_10pct_single_mesh_sweep_shards/layer_hi_r50-60-70-80-90.json",
+    "results/main_10pct_single_mesh_sweep_shards/layer_lo_r10-20-30-40.json",
+    "results/main_10pct_single_mesh_sweep_shards/node_hi_r60-70-80-90.json",
+    "results/main_10pct_single_mesh_sweep_shards/node_lo_r10-20-30-40-50.json"
   ]
 }

@@ -1,7 +1,7 @@
-[
+﻿[
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 0.0,
     "node_best": 0.9041944444444444,
     "layer_best": 0.9041944444444444,
@@ -14,8 +14,8 @@
     "layer_train_final": 0.932225
   },
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 10.0,
     "node_best": 0.9038333333333334,
     "layer_best": 0.9031944444444444,
@@ -28,8 +28,8 @@
     "layer_train_final": 0.9302166666666666
   },
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 20.0,
     "node_best": 0.9034444444444444,
     "layer_best": 0.9016388888888889,
@@ -42,8 +42,8 @@
     "layer_train_final": 0.9274749999999999
   },
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 30.0,
     "node_best": 0.9033055555555555,
     "layer_best": 0.8996111111111111,
@@ -56,8 +56,8 @@
     "layer_train_final": 0.9231666666666666
   },
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 40.0,
     "node_best": 0.9033888888888889,
     "layer_best": 0.8948055555555555,
@@ -70,8 +70,8 @@
     "layer_train_final": 0.9174833333333333
   },
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 50.0,
     "node_best": 0.9027777777777777,
     "layer_best": 0.8871111111111111,
@@ -84,8 +84,8 @@
     "layer_train_final": 0.9084833333333333
   },
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 60.0,
     "node_best": 0.9019166666666667,
     "layer_best": 0.8809999999999999,
@@ -98,8 +98,8 @@
     "layer_train_final": 0.8983166666666667
   },
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 70.0,
     "node_best": 0.89825,
     "layer_best": 0.8655277777777778,
@@ -112,8 +112,8 @@
     "layer_train_final": 0.881075
   },
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 80.0,
     "node_best": 0.8912222222222222,
     "layer_best": 0.8395555555555556,
@@ -126,8 +126,8 @@
     "layer_train_final": 0.853975
   },
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 90.0,
     "node_best": 0.876361111111111,
     "layer_best": 0.80375,
@@ -140,8 +140,8 @@
     "layer_train_final": 0.8149916666666667
   },
   {
-    "run": "3090 fine 10% (seed 44)",
-    "source": "results_v27_3090\\v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup_merged.json",
+    "run": "main 10% sweep",
+    "source": "data\\main_10pct_sweep.json",
     "ratio": 100.0,
     "node_best": 0.6501944444444444,
     "layer_best": 0.6501944444444444,
@@ -154,8 +154,8 @@
     "layer_train_final": 0.6570833333333334
   },
   {
-    "run": "4090 replicate 20% (seed 43)",
-    "source": "results_v27_4090\\v27_4090_7gpu_single_mesh_stage_refine_seed43_merged.json",
+    "run": "replicate 20% sweep",
+    "source": "data\\replicate_20pct_sweep.json",
     "ratio": 0.0,
     "node_best": 0.90225,
     "layer_best": 0.90225,
@@ -168,8 +168,8 @@
     "layer_train_final": 0.9314333333333334
   },
   {
-    "run": "4090 replicate 20% (seed 43)",
-    "source": "results_v27_4090\\v27_4090_7gpu_single_mesh_stage_refine_seed43_merged.json",
+    "run": "replicate 20% sweep",
+    "source": "data\\replicate_20pct_sweep.json",
     "ratio": 20.0,
     "node_best": 0.9010833333333333,
     "layer_best": 0.8989444444444444,
@@ -182,8 +182,8 @@
     "layer_train_final": 0.9265333333333334
   },
   {
-    "run": "4090 replicate 20% (seed 43)",
-    "source": "results_v27_4090\\v27_4090_7gpu_single_mesh_stage_refine_seed43_merged.json",
+    "run": "replicate 20% sweep",
+    "source": "data\\replicate_20pct_sweep.json",
     "ratio": 40.0,
     "node_best": 0.9,
     "layer_best": 0.8931944444444445,
@@ -196,8 +196,8 @@
     "layer_train_final": 0.9182666666666667
   },
   {
-    "run": "4090 replicate 20% (seed 43)",
-    "source": "results_v27_4090\\v27_4090_7gpu_single_mesh_stage_refine_seed43_merged.json",
+    "run": "replicate 20% sweep",
+    "source": "data\\replicate_20pct_sweep.json",
     "ratio": 60.0,
     "node_best": 0.8990555555555556,
     "layer_best": 0.8739444444444445,
@@ -210,8 +210,8 @@
     "layer_train_final": 0.8929333333333332
   },
   {
-    "run": "4090 replicate 20% (seed 43)",
-    "source": "results_v27_4090\\v27_4090_7gpu_single_mesh_stage_refine_seed43_merged.json",
+    "run": "replicate 20% sweep",
+    "source": "data\\replicate_20pct_sweep.json",
     "ratio": 80.0,
     "node_best": 0.8913611111111112,
     "layer_best": 0.8460555555555556,
@@ -224,8 +224,8 @@
     "layer_train_final": 0.8602250000000001
   },
   {
-    "run": "4090 replicate 20% (seed 43)",
-    "source": "results_v27_4090\\v27_4090_7gpu_single_mesh_stage_refine_seed43_merged.json",
+    "run": "replicate 20% sweep",
+    "source": "data\\replicate_20pct_sweep.json",
     "ratio": 100.0,
     "node_best": 0.6630555555555555,
     "layer_best": 0.6630555555555555,
@@ -238,3 +238,4 @@
     "layer_train_final": 0.6684916666666667
   }
 ]
+

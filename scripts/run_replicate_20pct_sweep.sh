@@ -3,24 +3,16 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-# Reuse the warmup checkpoint produced by:
-# scripts/server_run_v27_3090_4gpu_single_mesh_stage_refine.sh
-SOURCE_WARMUP_CKPT="results/v27_3090_4gpu_single_mesh_stage_refine_seed44_ckpt/shared_warmup.pt"
-
-RESULT_PREFIX="v27_3090_4gpu_single_mesh_stage_refine_fine10_seed44_reusewarmup"
+RESULT_PREFIX="replicate_20pct_single_mesh_sweep"
 SHARD_DIR="results/${RESULT_PREFIX}_shards"
 LOG_DIR="results/${RESULT_PREFIX}_logs"
 CKPT_DIR="results/${RESULT_PREFIX}_ckpt"
+WARMUP_CKPT="${CKPT_DIR}/shared_warmup.pt"
+WARMUP_JSON="results/${RESULT_PREFIX}_warmup.json"
 MERGED_JSON="results/${RESULT_PREFIX}_merged.json"
 
-if [[ ! -f "${SOURCE_WARMUP_CKPT}" ]]; then
-  echo "Missing warmup checkpoint: ${SOURCE_WARMUP_CKPT}" >&2
-  echo "Keep the completed warmup from the original 3090 run, or adjust SOURCE_WARMUP_CKPT in this script." >&2
-  exit 1
-fi
-
 mkdir -p "${SHARD_DIR}" "${LOG_DIR}" "${CKPT_DIR}"
-rm -f "${SHARD_DIR}"/*.json "${LOG_DIR}"/*.log "${MERGED_JSON}"
+rm -f "${SHARD_DIR}"/*.json "${LOG_DIR}"/*.log "${MERGED_JSON}" "${WARMUP_JSON}" "${WARMUP_CKPT}"
 
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-4}"
 export PYTHONUNBUFFERED=1
@@ -38,7 +30,7 @@ python tools/download_emnist.py
 COMMON_ARGS=(
   --preset main
   --task-set three
-  --seed 44
+  --seed 43
   --input-preprocess pca
   --train-samples 40000
   --test-samples 12000
@@ -75,10 +67,18 @@ COMMON_ARGS=(
   --save-condition-checkpoints
   --track-train-accuracy
   --checkpoint-dir "${CKPT_DIR}"
-  --warmup-checkpoint "${SOURCE_WARMUP_CKPT}"
+  --warmup-checkpoint "${WARMUP_CKPT}"
 )
 
-echo "[reuse] using completed warmup checkpoint: ${SOURCE_WARMUP_CKPT}"
+echo "[warmup] seed=43 single 64x64 mesh -> ${WARMUP_CKPT}"
+CUDA_VISIBLE_DEVICES=0 python -u train_mpu_pnn.py \
+  "${COMMON_ARGS[@]}" \
+  --output "${WARMUP_JSON}" \
+  --ratios 0 \
+  --modes node_pruning \
+  --warmup-only \
+  --no-resume \
+  > "${LOG_DIR}/warmup.log" 2>&1
 
 pids=()
 labels=()
@@ -112,9 +112,12 @@ run_shard() {
 }
 
 run_shard 0 boundary node_pruning,clements_layer 0 100
-run_shard 1 node_lo  node_pruning 10 20 30 40 50
-run_shard 2 node_hi  node_pruning 60 70 80 90
-run_shard 3 layer_lo clements_layer 10 20 30 40
+run_shard 1 node20   node_pruning 20
+run_shard 2 node40   node_pruning 40
+run_shard 3 node60   node_pruning 60
+run_shard 4 node80   node_pruning 80
+run_shard 5 layer_lo clements_layer 20 40
+run_shard 6 layer_hi clements_layer 60 80
 
 failed=0
 for i in "${!pids[@]}"; do
@@ -135,14 +138,6 @@ if [[ "${failed}" -ne 0 ]]; then
   exit 1
 fi
 
-CUDA_VISIBLE_DEVICES=0 python -u train_mpu_pnn.py \
-  "${COMMON_ARGS[@]}" \
-  --output "${SHARD_DIR}/layer_hi_r50-60-70-80-90.json" \
-  --ratios 50 60 70 80 90 \
-  --modes clements_layer \
-  --no-resume \
-  > "${LOG_DIR}/layer_hi_r50-60-70-80-90.log" 2>&1
-
 shopt -s nullglob
 shards=("${SHARD_DIR}"/*.json)
 
@@ -159,4 +154,4 @@ python tools/export_figure_data.py \
   --fig-dir results/v27_nature_figures \
   --out-dir paper_data
 
-echo "Done. v27 3090 fine10 reuse-warmup JSON: ${MERGED_JSON}"
+echo "Done. Replicate 20%-step single-mesh sweep JSON: ${MERGED_JSON}"

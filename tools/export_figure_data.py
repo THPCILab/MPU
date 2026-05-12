@@ -8,13 +8,13 @@ from scipy.io import savemat
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = "data/v27_3090_fine10_merged.json"
+DEFAULT_INPUT = "data/main_10pct_sweep.json"
 DEFAULT_FIG_DIR = "results/v27_nature_figures"
 DEFAULT_OUT_DIR = "paper_data"
 
 
 def load_payload(path):
-    with Path(path).open("r", encoding="utf-8") as f:
+    with Path(path).open("r", encoding="utf-8-sig") as f:
         return json.load(f)
 
 
@@ -27,8 +27,8 @@ def condition(payload, name="eta_off"):
 
 def load_external_warmup_result():
     candidates = [
-        ROOT / "data" / "v27_3090_warmup.json",
-        ROOT / "data" / "v27_4090_warmup.json",
+        ROOT / "data" / "warmup_main.json",
+        ROOT / "data" / "warmup_replicate.json",
     ]
     for path in candidates:
         if not path.exists():
@@ -166,7 +166,7 @@ def export_fig3(payload, cond, fig_dir, root):
         "Fig. 3 warmup and 90% neuron-level sharing convergence",
         "The plotted left-axis data are per-task test accuracies in percent; "
         "the right-axis data are training loss. The full warmup segment is loaded from the "
-        "standalone v27 warmup JSON because the fine10 merged JSON reused the saved warmup checkpoint.",
+        "standalone warmup JSON because the main sweep reused the saved warmup checkpoint.",
     )
 
 
