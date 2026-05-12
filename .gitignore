@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Datasets and generated checkpoints
+data/EMNIST/
+data/emnist/
+results/*_ckpt/
+results/*_logs/
+results/*_shards/
+*.pt
+*.pth
+
+# Local run artifacts
+results/local_*.json
+results/local_*/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
