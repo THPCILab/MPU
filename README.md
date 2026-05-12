@@ -1,16 +1,16 @@
 # MPU: Fine-Grained Sharing in Multi-Task Photonic Neural Networks
 
-This repository contains the compact reproduction package for the V27 single-mesh experiments. The code studies how a fixed, passive **meta processing unit (MPU)** can replace selected 2-to-2 MZI neurons in a multi-task photonic neural network while retaining classification accuracy.
+This repository studies how a fixed, passive **meta processing unit (MPU)** can replace selected 2-to-2 MZI neurons in a multi-task photonic neural network while retaining classification accuracy.
 
 The final setting is intentionally minimal: EMNIST ByClass is projected to 64 PCA features, passed through one complex 64-to-64 Clements mesh, detected once by square-law intensity readout, normalized by shared LayerNorm + GELU, and classified by task-specific heads.
 
-![architecture](results/v27_single_mesh_architecture.png)
+![architecture](results/MPU.png)
 
 ## Main Result
 
 At 90% MPU sharing, the learned neuron-level replacement pattern retains substantially more multi-task accuracy than sharing a coarse layer/stage prefix.
 
-![accuracy curve](results/v27_nature_figures/fig1_main_accuracy_curve.png)
+![accuracy curve](results/main_figure.png)
 
 ## Repository Layout
 
