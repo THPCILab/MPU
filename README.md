@@ -4,13 +4,17 @@ This work studies how a fixed, passive **meta processing unit (MPU)** can replac
 
 The final setting is intentionally minimal: EMNIST ByClass is projected to 64 PCA features, passed through one complex 64-to-64 Clements mesh, detected once by square-law intensity readout, normalized by shared LayerNorm + GELU, and classified by task-specific heads.
 
-![architecture](results/MPU.png)
+![Figure 1: MPU architecture](results/MPU.png)
+
+[Figure 1 (PDF)](results/Fig1.pdf)
 
 ## Main Result
 
 At 90% MPU sharing, the learned neuron-level replacement pattern retains substantially more multi-task accuracy than sharing a coarse layer/stage prefix.
 
-![accuracy curve](results/main_figure.png)
+![Figure 5: Multi-task sharing and quantization](results/main_figure.png)
+
+[Figure 5 (PDF)](results/Fig5.pdf)
 
 ## Repository Layout
 
