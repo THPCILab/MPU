@@ -12,6 +12,8 @@ results/*_logs/
 results/*_shards/
 *.pt
 *.pth
+data/fig5/replay/
+results/quantization_training/
 
 # Local run artifacts
 results/local_*.json

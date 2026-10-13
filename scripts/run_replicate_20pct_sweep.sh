@@ -147,11 +147,11 @@ python tools/merge_shards.py \
 
 python tools/plot_nature_figures.py \
   --input "${MERGED_JSON}" \
-  --out-dir results/v27_nature_figures
+  --out-dir results/analysis_panels
 
 python tools/export_figure_data.py \
   --input "${MERGED_JSON}" \
-  --fig-dir results/v27_nature_figures \
+  --fig-dir results/analysis_panels \
   --out-dir paper_data
 
 echo "Done. Replicate 20%-step single-mesh sweep JSON: ${MERGED_JSON}"

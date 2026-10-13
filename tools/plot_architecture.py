@@ -103,7 +103,7 @@ def main():
     arrow(ax, 0.88, 0.545, 0.92, 0.655)
     arrow(ax, 0.88, 0.545, 0.92, 0.525)
 
-    ax.text(0.50, 0.94, "V27 Single-Mesh Multi-Task Photonic Network", ha="center", fontsize=17, weight="bold")
+    ax.text(0.50, 0.94, "Single-Mesh Multi-Task Photonic Network", ha="center", fontsize=17, weight="bold")
     ax.text(
         0.50,
         0.895,
@@ -128,7 +128,7 @@ def main():
         color="#344054",
     )
 
-    out = ROOT / "results" / "v27_single_mesh_architecture"
+    out = ROOT / "results" / "single_mesh_architecture"
     fig.savefig(out.with_suffix(".png"), dpi=300, bbox_inches="tight")
     fig.savefig(out.with_suffix(".pdf"), bbox_inches="tight")
     print(f"Saved {out.with_suffix('.png')}")

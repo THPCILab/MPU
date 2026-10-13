@@ -370,7 +370,7 @@ def plot_patterns(payload, out_dir, ratios=None, stem="fig4", main_title="Shared
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default=DEFAULT_INPUT)
-    parser.add_argument("--out-dir", default="results/v27_nature_figures")
+    parser.add_argument("--out-dir", default="results/analysis_panels")
     args = parser.parse_args()
     configure()
     payload = load_payload(args.input)

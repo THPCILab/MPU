@@ -9,7 +9,7 @@ from scipy.io import savemat
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT = "data/main_10pct_sweep.json"
-DEFAULT_FIG_DIR = "results/v27_nature_figures"
+DEFAULT_FIG_DIR = "results/analysis_panels"
 DEFAULT_OUT_DIR = "paper_data"
 
 
@@ -211,9 +211,10 @@ def main():
 
     write_readme(
         out_dir / "README.md",
-        "V27 Nature figure data package",
-        "Each subfolder follows one figure subtitle and contains the rendered PDF/PNG plus "
-        "`figure_data.mat` with the numerical data used to generate the figure.",
+        "Figure source data",
+        "The Fig1--Fig4 folders contain individual analysis plots, not manuscript figure "
+        "numbers. Each contains a PDF/PNG and `figure_data.mat`. Manuscript Fig. 5 "
+        "source data are in `Fig5_Sharing_and_Quantization/`.",
     )
     print(f"Wrote data package to {out_dir}")
 

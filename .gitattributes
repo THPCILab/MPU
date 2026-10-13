@@ -1,0 +1,10 @@
+* text=auto
+*.sh text eol=lf
+*.py text eol=lf
+data/fig5/nominal_runs/*.json -text
+data/fig5/device_runs/*.json -text
+*.pt -text
+*.npz -text
+*.mat -text
+*.pdf -text
+*.png -text

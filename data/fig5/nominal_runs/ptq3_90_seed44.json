@@ -1,0 +1,463 @@
+{
+  "status": "COMPLETE",
+  "settings": {
+    "seed": 44,
+    "phase_quantization": "shared",
+    "phase_bits": 3,
+    "protocol": "hard PTQ of completed continuous checkpoints; no parameter updates",
+    "torch_threads": 4
+  },
+  "task_specs": [
+    {
+      "id": 0,
+      "name": "Digits",
+      "lo": 0,
+      "hi": 9,
+      "classes": 10
+    },
+    {
+      "id": 1,
+      "name": "Uppercase",
+      "lo": 10,
+      "hi": 35,
+      "classes": 26
+    },
+    {
+      "id": 2,
+      "name": "Lowercase",
+      "lo": 36,
+      "hi": 61,
+      "classes": 26
+    }
+  ],
+  "preprocess_profile": {
+    "input_preprocess": "pca",
+    "input_dim": 64,
+    "pca_rank": 64,
+    "pca_explained_variance_sum": 0.903144822572358,
+    "pca_component_variance": [
+      0.10844686627388,
+      0.06805501878261566,
+      0.057138361036777496,
+      0.0472300723195076,
+      0.04544192552566528,
+      0.043139345943927765,
+      0.03942124918103218,
+      0.035776227712631226,
+      0.032007019966840744,
+      0.027210049331188202,
+      0.023223482072353363,
+      0.02111346833407879,
+      0.020199058577418327,
+      0.01875266246497631,
+      0.018173351883888245,
+      0.017372259870171547,
+      0.015507269650697708,
+      0.015091023407876492,
+      0.013664938509464264,
+      0.01273336261510849,
+      0.01250763051211834,
+      0.011906311847269535,
+      0.010908631607890129,
+      0.009838041849434376,
+      0.009478493593633175,
+      0.00936494953930378,
+      0.008602012880146503,
+      0.007882717996835709,
+      0.007768368348479271,
+      0.007172516547143459,
+      0.006795279216021299,
+      0.006484440993517637,
+      0.006059753242880106,
+      0.005965441465377808,
+      0.005786408670246601,
+      0.005595869850367308,
+      0.005469220224767923,
+      0.005112465936690569,
+      0.00489823380485177,
+      0.004643277730792761,
+      0.004600872285664082,
+      0.0043560657650232315,
+      0.00426065968349576,
+      0.004115249961614609,
+      0.003943546675145626,
+      0.0037188937421888113,
+      0.0035556196235120296,
+      0.0032669021748006344,
+      0.003148201387375593,
+      0.002927575260400772,
+      0.002903991611674428,
+      0.002820375608280301,
+      0.0027096495032310486,
+      0.0026164769660681486,
+      0.0025763418525457382,
+      0.002511064987629652,
+      0.002467975253239274,
+      0.002338389167562127,
+      0.0022361120209097862,
+      0.002199473325163126,
+      0.0021395974326878786,
+      0.002022060099989176,
+      0.002000395441427827,
+      0.001772253424860537
+    ]
+  },
+  "efficiency_conditions": {
+    "eta_off": {
+      "curves": {
+        "0.90": {
+          "node_pruning": {
+            "final_mean": 0.16919444444444443,
+            "best_mean": 0.16919444444444443,
+            "best_epoch": 0,
+            "mean_hist": [
+              0.16919444444444443
+            ],
+            "task_hist": {
+              "0": [
+                0.23491666666666666
+              ],
+              "1": [
+                0.16741666666666666
+              ],
+              "2": [
+                0.10525
+              ]
+            },
+            "mask_profile": {
+              "effective_shared_ratio": 0.8998015873015873,
+              "shared_mzi": 1814,
+              "total_mzi": 2016,
+              "per_layer_shared_ratio": [
+                0.8998015873015873
+              ],
+              "per_layer_kind_shared_ratio": [
+                {
+                  "even": 0.8984375,
+                  "odd": 0.9012096774193549
+                }
+              ]
+            },
+            "quantization_profile": {
+              "enabled": true,
+              "mode": "shared",
+              "bits_per_phase": 3,
+              "shared_mzi": 1814,
+              "unique_shared_codewords": 64,
+              "used_shared_codewords": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  0,
+                  5
+                ],
+                [
+                  0,
+                  6
+                ],
+                [
+                  0,
+                  7
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  2
+                ],
+                [
+                  1,
+                  3
+                ],
+                [
+                  1,
+                  4
+                ],
+                [
+                  1,
+                  5
+                ],
+                [
+                  1,
+                  6
+                ],
+                [
+                  1,
+                  7
+                ],
+                [
+                  2,
+                  0
+                ],
+                [
+                  2,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  2,
+                  3
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  2,
+                  5
+                ],
+                [
+                  2,
+                  6
+                ],
+                [
+                  2,
+                  7
+                ],
+                [
+                  3,
+                  0
+                ],
+                [
+                  3,
+                  1
+                ],
+                [
+                  3,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  3,
+                  4
+                ],
+                [
+                  3,
+                  5
+                ],
+                [
+                  3,
+                  6
+                ],
+                [
+                  3,
+                  7
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  4,
+                  1
+                ],
+                [
+                  4,
+                  2
+                ],
+                [
+                  4,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ],
+                [
+                  4,
+                  5
+                ],
+                [
+                  4,
+                  6
+                ],
+                [
+                  4,
+                  7
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  5,
+                  1
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  5,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  5,
+                  6
+                ],
+                [
+                  5,
+                  7
+                ],
+                [
+                  6,
+                  0
+                ],
+                [
+                  6,
+                  1
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  6,
+                  3
+                ],
+                [
+                  6,
+                  4
+                ],
+                [
+                  6,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  6,
+                  7
+                ],
+                [
+                  7,
+                  0
+                ],
+                [
+                  7,
+                  1
+                ],
+                [
+                  7,
+                  2
+                ],
+                [
+                  7,
+                  3
+                ],
+                [
+                  7,
+                  4
+                ],
+                [
+                  7,
+                  5
+                ],
+                [
+                  7,
+                  6
+                ],
+                [
+                  7,
+                  7
+                ]
+              ],
+              "mean_abs_theta_quantization_error": 0.12920510465799817,
+              "mean_abs_phi_quantization_error": 0.19456602551876104
+            },
+            "source_continuous_checkpoint": "results_v30/checkpoints/continuous_seed44/continuous90_seed44_eta_off_node_pruning_r090_final.pt",
+            "source_continuous_recomputed_mean": 0.8681111111111112,
+            "source_continuous_recomputed_tasks": {
+              "0": 0.93425,
+              "1": 0.85275,
+              "2": 0.8173333333333334
+            },
+            "ptq_delta_pp": -69.89166666666668,
+            "parameter_updates": 0
+          }
+        }
+      }
+    }
+  },
+  "model_profile": {
+    "input_pixels": 784,
+    "input_preprocess": "pca",
+    "input_dim": 64,
+    "input_projection": "direct",
+    "input_rank": 64,
+    "hidden_dim": 64,
+    "num_clements_meshes": 1,
+    "mzi_per_clements_mesh": [
+      2016
+    ],
+    "total_mzi": 2016,
+    "head_mode": "task_specific",
+    "global_classes": 62,
+    "freeze_electrical_after_warmup": true,
+    "private_delta_lr_scale": 1.0,
+    "private_delta_weight_decay": 0.0001,
+    "guided_node_balance": "global",
+    "guided_node_prior": "stage_refine",
+    "guided_node_refine_fraction": 0.35,
+    "clements_layer_mode": "stage",
+    "block_shape": [
+      6,
+      6
+    ],
+    "photonic_propagation": "complex_field_mzi",
+    "mzi_unitary": "U(theta, phi) = i exp(i theta/2) [[exp(i phi) sin(theta/2), exp(i phi) cos(theta/2)], [cos(theta/2), -sin(theta/2)]]",
+    "photonic_readout": "per_mesh_intensity",
+    "norm_type": "layer",
+    "warmup_shared_ratio": 0.0,
+    "phase_quantization": "shared",
+    "phase_bits": 3,
+    "theta_codebook": "2^3 levels k*pi/2^3; pi excluded",
+    "phi_codebook": "2^3 periodic levels on [0, 2pi)",
+    "quantization_gradient": "straight-through estimator; every quantized forward pass uses hard codewords",
+    "detector": "per_mesh_intensity uses physical square-law detection after each mesh; per_mesh_coherent and coherent_stack are ablations",
+    "sharing_equation": "theta_task = theta_shared + (1 - shared_mask) * delta_task",
+    "phase_sharing_equation": "phi_task = phi_shared + (1 - shared_mask) * delta_phi_task",
+    "shared_mask_meaning": "1 means a design-time trainable cross-task common 2x2 unit with no task delta; 0 means task-private phase deltas are enabled",
+    "mpu_deployment_semantics": "After training, shared_mask=1 units are fabricated/fixed as passive MPU transfer matrices using the learned common theta/phi. The training metric is multi-task accuracy only."
+  }
+}

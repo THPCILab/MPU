@@ -1,3 +1,3 @@
-# V27 Nature figure data package
+# Figure source data
 
-Each subfolder follows one figure subtitle and contains the rendered PDF/PNG plus `figure_data.mat` with the numerical data used to generate the figure.
+The Fig1--Fig4 folders contain individual analysis plots, not manuscript figure numbers. Each contains a PDF/PNG and `figure_data.mat`. Manuscript Fig. 5 source data are in `Fig5_Sharing_and_Quantization/`.

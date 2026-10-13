@@ -1,8 +1,8 @@
-﻿# V27 Final Training Strategy and Network Configuration Report
+# Continuous-operator sharing: training strategy and network configuration
 
 ## 1. Research Goal
 
-The final v27 experiment validates a fine-grained MPU replacement mechanism for multi-task photonic neural networks. The hardware motivation is that a passive 2-to-2 meta processing unit (MPU) can replace a conventional reconfigurable MZI with much smaller footprint and lower power. The cost is that the MPU is fixed after fabrication.
+The continuous-operator software experiment evaluates fine-grained MPU sharing in multi-task photonic neural networks. A passive two-mode MPU offers a compact alternative to a tunable MZI, while retained task-private MZIs provide adaptation. Finite-codebook deployment is evaluated separately in the quantization study described in [Figure 5 source data](fig5_reproducibility.md).
 
 In the experiment, a shared MPU is still trainable during offline design. After the sharing pattern and common 2-to-2 transfer matrix are learned, the corresponding MZI neuron is interpreted as a passive MPU in deployment.
 
@@ -449,9 +449,9 @@ scripts/run_replicate_20pct_sweep.sh
 Plotting and data export:
 
 ```text
-plot_v27_nature_figures.py
-plot_v27_single_mesh_architecture.py
-export_v27_nature_figure_data.py
+tools/plot_nature_figures.py
+tools/plot_architecture.py
+tools/export_figure_data.py
 ```
 
 Main result data:
@@ -464,6 +464,6 @@ data/warmup_main.json
 Figure data package:
 
 ```text
-paper_data_v27_nature_figures/
+paper_data/
 ```
 

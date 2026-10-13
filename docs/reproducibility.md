@@ -1,8 +1,8 @@
 ﻿# Reproducibility Notes
 
-## Final Figure Data
+## Continuous-sharing figure data
 
-The final paper figures are generated from:
+The continuous-sharing analysis plots are generated from:
 
 - `data/main_10pct_sweep.json`: 10%-step accuracy, masks, confusion matrices, and fine-tuning histories.
 - `data/warmup_main.json`: full warmup histories for the main warmup run.
@@ -21,6 +21,7 @@ The key reported number is read from the main 10%-step sweep:
 python tools/plot_nature_figures.py
 python tools/plot_architecture.py
 python tools/export_figure_data.py
+python tools/plot_fig5_quantization.py
 ```
 
 ## Regenerating Training Results
@@ -44,4 +45,17 @@ bash scripts/run_replicate_20pct_sweep.sh
 ```
 
 The training script saves JSON histories, masks, confusion matrices, and checkpoints when the corresponding `--save-*` flags are enabled.
+
+## Quantization and device-error study
+
+The submission Fig. 5(d) source data and quantized training code follow the same
+`tools/data/paper_data/results` layout. See
+[fig5_reproducibility.md](fig5_reproducibility.md) for the per-condition seed
+counts, common PCA inputs, fixed codebook and paired active-control error model.
+CPU source-data validation and forward/backward smoke tests are available:
+
+```bash
+python tools/plot_fig5_quantization.py --validate-only
+python tools/check_quantization_model.py
+```
 
