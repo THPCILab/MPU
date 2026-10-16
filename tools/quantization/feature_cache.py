@@ -14,7 +14,7 @@ def install(exp, cache_path):
         actual = dict(task_set=task_set,train_samples=train_samples,test_samples=test_samples,
                       seed=seed,label_mode=label_mode,input_preprocess=input_preprocess,input_rank=input_rank)
         if actual != expected or batch_size != 512:
-            raise RuntimeError("Requested data protocol differs from the audited feature cache")
+            raise RuntimeError("Requested data protocol differs from the supplied feature cache")
         train = {tid:DataLoader(TensorDataset(*tensors),batch_size=batch_size,shuffle=True)
                  for tid,tensors in payload["train"].items()}
         test = {tid:DataLoader(TensorDataset(*tensors),batch_size=batch_size,shuffle=False)

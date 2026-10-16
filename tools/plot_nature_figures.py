@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.lines import Line2D
 from matplotlib.colors import BoundaryNorm, ListedColormap
+from figure_inputs import pattern_ratios, prepare_payload
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -49,21 +50,6 @@ def condition(payload, name="eta_off"):
     return next(iter(conditions.values()))
 
 
-def load_external_warmup_result():
-    candidates = [
-        ROOT / "data" / "warmup_main.json",
-        ROOT / "data" / "warmup_replicate.json",
-    ]
-    for path in candidates:
-        if not path.exists():
-            continue
-        payload = load_payload(path)
-        warmup = condition(payload).get("warmup", {})
-        if len(warmup.get("mean_hist", [])) > 1:
-            return path, warmup
-    return None, None
-
-
 def out_path(out_dir, stem, suffix):
     out_dir.mkdir(parents=True, exist_ok=True)
     return out_dir / f"{stem}_{suffix}"
@@ -102,12 +88,16 @@ def plot_main_curve(payload, out_dir):
     xs = np.array([r["ratio"] for r in rows])
     node = np.array([r["node"] for r in rows])
     layer = np.array([r["layer"] for r in rows])
-    upper = node[xs == 0][0]
-    lower = node[xs == 100][0]
+    if not rows:
+        raise ValueError("Input has no ratios containing both comparison modes")
+    upper = node[xs == 0][0] if np.any(xs == 0) else node.max()
+    lower = node[xs == 100][0] if np.any(xs == 100) else min(node.min(), layer.min())
 
     fig, ax = plt.subplots(figsize=(7.6, 5.2))
-    ax.axhline(upper, color=DARK, linewidth=2.1, linestyle=(0, (2, 2)), zorder=1)
-    ax.axhline(lower, color=MID, linewidth=2.1, linestyle=(0, (5, 3)), zorder=1)
+    if np.any(xs == 0):
+        ax.axhline(upper, color=DARK, linewidth=2.1, linestyle=(0, (2, 2)), zorder=1)
+    if np.any(xs == 100):
+        ax.axhline(lower, color=MID, linewidth=2.1, linestyle=(0, (5, 3)), zorder=1)
     ax.plot(xs, node, color=NODE, marker="^", markersize=8.5, linewidth=2.8, zorder=3)
     ax.plot(xs, layer, color=LAYER, marker="o", markersize=7.8, linewidth=2.8, zorder=3)
 
@@ -116,8 +106,8 @@ def plot_main_curve(payload, out_dir):
     ax.set_title("Accuracy Retention Under MPU Replacement", weight="bold", pad=10)
     ax.set_xticks(np.arange(0, 101, 10))
     ax.set_xlim(-2, 102)
-    ymin = max(58, min(lower, layer.min()) - 4)
-    ymax = min(94, max(upper, node.max()) + 1.8)
+    ymin = max(0, min(lower, node.min(), layer.min()) - 4)
+    ymax = min(100, max(upper, node.max(), layer.max()) + 1.8)
     ax.set_ylim(ymin, ymax)
     ax.grid(True, axis="y", linestyle=":", color=GRID, linewidth=1.0)
     ax.spines["top"].set_visible(False)
@@ -129,13 +119,15 @@ def plot_main_curve(payload, out_dir):
         Line2D([0], [0], color=DARK, linestyle=(0, (2, 2)), linewidth=2.1, label="0% shared upper bound"),
         Line2D([0], [0], color=MID, linestyle=(0, (5, 3)), linewidth=2.1, label="100% shared lower bound"),
     ]
+    handles = handles[:2] + ([handles[2]] if np.any(xs == 0) else []) + ([handles[3]] if np.any(xs == 100) else [])
     ax.legend(handles=handles, frameon=False, loc="lower left", bbox_to_anchor=(0.02, 0.04))
     x90 = 90.0
-    node90 = node[xs == 90][0]
-    layer90 = layer[xs == 90][0]
     diff_color = "#4A4F5A"
-    ax.vlines(x90, layer90, node90, color=diff_color, linewidth=1.9, linestyle=(0, (3, 2)), zorder=2)
-    ax.scatter([x90, x90], [layer90, node90], color=[LAYER, NODE], s=68, zorder=4)
+    if np.any(xs == 90):
+        node90 = node[xs == 90][0]
+        layer90 = layer[xs == 90][0]
+        ax.vlines(x90, layer90, node90, color=diff_color, linewidth=1.9, linestyle=(0, (3, 2)), zorder=2)
+        ax.scatter([x90, x90], [layer90, node90], color=[LAYER, NODE], s=68, zorder=4)
     # ax.annotate(
     #     "+7.26 pp \n at 90%",
     #     xy=(x90*0.7, (node90 + layer90) / 2),
@@ -166,6 +158,9 @@ def class_labels(task_name, n):
 
 def plot_confusion(payload, out_dir):
     cond = condition(payload)
+    if "0.90" not in cond["curves"]:
+        print("Skipping 90% confusion matrices: ratio not present in this input.")
+        return
     modes = [("node_pruning", "Neuron-level sharing", NODE), ("clements_layer", "Layer-level sharing", LAYER)]
     names = task_names(payload)
     fig, axes = plt.subplots(2, 3, figsize=(13.6, 8.2), constrained_layout=True)
@@ -205,10 +200,10 @@ def plot_confusion(payload, out_dir):
 
 def plot_convergence(payload, out_dir):
     cond = condition(payload)
+    if "0.90" not in cond["curves"]:
+        print("Skipping 90% convergence: ratio not present in this input.")
+        return
     warmup = cond.get("warmup") or {}
-    external_warmup_path, external_warmup = load_external_warmup_result()
-    if external_warmup is not None:
-        warmup = external_warmup
     node = cond["curves"]["0.90"]["node_pruning"]
 
     warmup_len = len(warmup.get("mean_hist", []))
@@ -345,8 +340,11 @@ def draw_mesh(ax, mask_layer, shared_color="#9AA4B2", private_color=NODE):
 
 def plot_patterns(payload, out_dir, ratios=None, stem="fig4", main_title="Shared MPU Pattern Across Replacement Ratios"):
     cond = condition(payload)
-    ratios = ratios or [10, 30, 50, 70, 90]
-    fig, axes = plt.subplots(len(ratios), 2, figsize=(11.5, 14.6), constrained_layout=False)
+    ratios = pattern_ratios(cond, ratios)
+    if not ratios:
+        print("Skipping sharing-pattern panel: no requested masks in this input.")
+        return
+    fig, axes = plt.subplots(len(ratios), 2, figsize=(11.5, max(4.5, 2.92 * len(ratios))), squeeze=False, constrained_layout=False)
     fig.subplots_adjust(left=0.115, right=0.985, bottom=0.045, top=0.89, hspace=0.26, wspace=0.08)
     for row, ratio in enumerate(ratios):
         key = f"{ratio / 100:.2f}"
@@ -371,9 +369,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default=DEFAULT_INPUT)
     parser.add_argument("--out-dir", default="results/analysis_panels")
+    parser.add_argument("--warmup-input", help="Optional matching full warmup JSON")
     args = parser.parse_args()
     configure()
-    payload = load_payload(args.input)
+    input_path = ROOT / args.input
+    payload = prepare_payload(load_payload(input_path), input_path, args.warmup_input)
     out_dir = ROOT / args.out_dir
     plot_main_curve(payload, out_dir)
     plot_confusion(payload, out_dir)

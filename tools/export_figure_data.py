@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 from scipy.io import savemat
+from figure_inputs import pattern_ratios, prepare_payload
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,21 +24,6 @@ def condition(payload, name="eta_off"):
     if name in conditions:
         return conditions[name]
     return next(iter(conditions.values()))
-
-
-def load_external_warmup_result():
-    candidates = [
-        ROOT / "data" / "warmup_main.json",
-        ROOT / "data" / "warmup_replicate.json",
-    ]
-    for path in candidates:
-        if not path.exists():
-            continue
-        payload = load_payload(path)
-        warmup = condition(payload).get("warmup", {})
-        if len(warmup.get("mean_hist", [])) > 1:
-            return path, warmup
-    return None, None
 
 
 def task_names(payload):
@@ -80,9 +66,15 @@ def export_fig1(cond, fig_dir, root):
     layer_best = np.array([100.0 * r[2]["best_mean"] for r in rows], dtype=float)
     node_final = np.array([100.0 * r[1]["final_mean"] for r in rows], dtype=float)
     layer_final = np.array([100.0 * r[2]["final_mean"] for r in rows], dtype=float)
-    idx90 = np.where(np.isclose(ratios, 90.0))[0][0]
-    idx0 = np.where(np.isclose(ratios, 0.0))[0][0]
-    idx100 = np.where(np.isclose(ratios, 100.0))[0][0]
+    optional = {}
+    for ratio, name in [(0, "upper_bound_0pct_shared_percent"), (100, "lower_bound_100pct_shared_percent")]:
+        indices = np.where(np.isclose(ratios, ratio))[0]
+        if len(indices):
+            optional[name] = np.array([[node_best[indices[0]]]])
+    indices = np.where(np.isclose(ratios, 90))[0]
+    if len(indices):
+        i = indices[0]
+        optional["gain_at_90pct_percentage_points"] = np.array([[node_best[i] - layer_best[i]]])
     savemat(
         folder / "figure_data.mat",
         {
@@ -91,21 +83,21 @@ def export_fig1(cond, fig_dir, root):
             "layer_level_best_accuracy_percent": layer_best,
             "node_level_final_accuracy_percent": node_final,
             "layer_level_final_accuracy_percent": layer_final,
-            "upper_bound_0pct_shared_percent": np.array([[node_best[idx0]]]),
-            "lower_bound_100pct_shared_percent": np.array([[node_best[idx100]]]),
-            "gain_at_90pct_percentage_points": np.array([[node_best[idx90] - layer_best[idx90]]]),
+            **optional,
         },
     )
     copy_figures(fig_dir, folder, "fig1_main_accuracy_curve")
     write_readme(
         folder / "README.md",
         "Fig. 1 Accuracy retention under MPU replacement",
-        "Data are test accuracies in percent. The 90% node-layer gain is stored as "
-        "`gain_at_90pct_percentage_points`.",
+        "Data are test accuracies in percent. Endpoint and 90% gain fields are included only when that ratio exists.",
     )
 
 
 def export_fig2(payload, cond, fig_dir, root):
+    if "0.90" not in cond["curves"]:
+        print("Skipping 90% confusion export: ratio not present.")
+        return
     folder = root / "Fig2_90pct_Shared_MPU_Confusion_Matrices"
     folder.mkdir(parents=True, exist_ok=True)
     names = task_names(payload)
@@ -128,12 +120,12 @@ def export_fig2(payload, cond, fig_dir, root):
 
 
 def export_fig3(payload, cond, fig_dir, root):
+    if "0.90" not in cond["curves"]:
+        print("Skipping 90% convergence export: ratio not present.")
+        return
     folder = root / "Fig3_90pct_Neuron_Level_Convergence"
     folder.mkdir(parents=True, exist_ok=True)
     warmup = cond.get("warmup") or {}
-    external_warmup_path, external_warmup = load_external_warmup_result()
-    if external_warmup is not None:
-        warmup = external_warmup
     node = cond["curves"]["0.90"]["node_pruning"]
     warmup_len = len(warmup.get("mean_hist", []))
     warmup_epochs = np.arange(1, warmup_len + 1, dtype=float) if warmup_len > 1 else np.array([0.0], dtype=float)
@@ -149,8 +141,8 @@ def export_fig3(payload, cond, fig_dir, root):
     }
     if warmup_len:
         data["warmup_mean_test_accuracy_percent"] = np.array(warmup["mean_hist"], dtype=float) * 100.0
-        if external_warmup_path is not None:
-            data["warmup_source_json"] = np.array([str(external_warmup_path.relative_to(ROOT))], dtype=object)
+        if cond.get("warmup_source"):
+            data["warmup_source_json"] = np.array([cond["warmup_source"]], dtype=object)
         for task_id in ["0", "1", "2"]:
             data[f"warmup_task{task_id}_test_accuracy_percent"] = np.array(warmup["task_hist"][task_id], dtype=float) * 100.0
     if "train_loss_hist" in warmup:
@@ -173,7 +165,7 @@ def export_fig3(payload, cond, fig_dir, root):
 def export_fig4(cond, fig_dir, root):
     folder = root / "Fig4_MPU_Sharing_Patterns"
     folder.mkdir(parents=True, exist_ok=True)
-    ratios = [10, 30, 50, 70, 90]
+    ratios = pattern_ratios(cond)
     data = {"shared_mpu_ratio_percent": np.array(ratios, dtype=float)}
     for ratio in ratios:
         key = f"{ratio / 100:.2f}"
@@ -196,9 +188,11 @@ def main():
     parser.add_argument("--input", default=DEFAULT_INPUT)
     parser.add_argument("--fig-dir", default=DEFAULT_FIG_DIR)
     parser.add_argument("--out-dir", default=DEFAULT_OUT_DIR)
+    parser.add_argument("--warmup-input", help="Optional matching full warmup JSON")
     args = parser.parse_args()
 
-    payload = load_payload(ROOT / args.input)
+    input_path = ROOT / args.input
+    payload = prepare_payload(load_payload(input_path), input_path, args.warmup_input)
     cond = condition(payload)
     fig_dir = ROOT / args.fig_dir
     out_dir = ROOT / args.out_dir

@@ -80,14 +80,10 @@ def validated_runs():
     return runs, summary, checked
 
 
-def export(runs, summary, checked):
-    out = ROOT / "paper_data/Fig5_Sharing_and_Quantization"
+def export(runs, summary, checked, out=None):
+    out = Path(out) if out is not None else ROOT / "paper_data/Fig5_Sharing_and_Quantization"
     out.mkdir(parents=True, exist_ok=True)
     runs.to_csv(out / "panel_d_runs.csv", index=False)
-    runs.to_csv(DATA / "quantization_runs.csv", index=False)
-    nominal = pd.read_csv(DATA / "nominal_quantization_runs.csv")
-    nominal["source"] = nominal["source"].map(lambda name: "nominal_runs/" + basename(name))
-    nominal.to_csv(DATA / "nominal_quantization_runs.csv", index=False)
     summary.to_csv(out / "panel_d_summary.csv", index=False)
     means = np.vstack([summary[summary.condition == c].sort_values("sharing_ratio").mean_accuracy_percent for c in ORDER])
     sd = np.vstack([summary[summary.condition == c].sort_values("sharing_ratio").sample_sd_percent for c in ORDER])
@@ -115,7 +111,7 @@ def export(runs, summary, checked):
     (out / "source_hashes.json").write_text(json.dumps(hashes, indent=2) + "\n", encoding="utf-8")
 
 
-def draw(summary):
+def draw(summary, output=None):
     plt.rcParams.update({"font.family": "sans-serif",
         "font.sans-serif": ["Arial", "DejaVu Sans"], "font.size": 10,
         "pdf.fonttype": 42, "axes.spines.top": False, "axes.spines.right": False})
@@ -132,7 +128,7 @@ def draw(summary):
     ax.grid(axis="y", color="#E5E8EF", linewidth=.7)
     ax.legend(loc="upper center", bbox_to_anchor=(.5, -.20), ncol=2,
               frameon=False, fontsize=8.5)
-    output = ROOT / "results/analysis_panels"
+    output = Path(output) if output is not None else ROOT / "results/analysis_panels"
     output.mkdir(parents=True, exist_ok=True)
     fig.savefig(output / "fig5d_quantization.pdf")
     fig.savefig(output / "fig5d_quantization.png", dpi=220)
@@ -142,11 +138,13 @@ def draw(summary):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--validate-only", action="store_true")
+    parser.add_argument("--out-dir", help="Write generated plot/data under this directory without modifying archived inputs")
     args = parser.parse_args()
     runs, summary, checked = validated_runs()
     if not args.validate_only:
-        export(runs, summary, checked)
-        draw(summary)
+        out = Path(args.out_dir) if args.out_dir else None
+        export(runs, summary, checked, out / "source_data" if out else None)
+        draw(summary, out)
     print(f"Validated {len(runs)} run/ratio rows and {len(summary)} plotted means from {len(checked)} source JSONs.")
 
 

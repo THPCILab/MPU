@@ -10,7 +10,6 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
-from torchvision import datasets
 
 
 ROOT = Path(__file__).resolve().parent
@@ -66,6 +65,8 @@ def get_task_loaders(
     input_preprocess="learned",
     input_rank=64,
 ):
+    from torchvision import datasets
+
     specs = task_specs(task_set)
     raw_train = datasets.EMNIST(root=str(ROOT / "data"), split="byclass", train=True, download=download)
     raw_test = datasets.EMNIST(root=str(ROOT / "data"), split="byclass", train=False, download=download)

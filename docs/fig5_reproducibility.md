@@ -69,7 +69,7 @@ of one trained model, not five training seeds. No extra fine-tuning is applied.
 - `train_device_codebook.py`: fixed passive table deployment.
 - `paired_voltage_test.py`: same-checkpoint active-MZI perturbation.
 - `feature_cache.py`: optional local PCA inputs and loader RNG state.
-- `checkpoint_training.py`: epoch recovery without changing update order.
+- `checkpoint_training.py`: explicit recovery hooks without changing update order.
 
 Per-sample PCA caches and model checkpoints are not distributed. Retraining
 downloads the public EMNIST ByClass dataset and prepares 40,000 training and
@@ -99,11 +99,15 @@ The fresh-input training route reproduces the procedure, not an exact replay
 of the archived curves. Replotting and source-data validation reproduce the
 published numerical curves directly and require no retraining.
 
+Recovery files now have separate warmup and fine-tuning namespaces. Their keys
+include masks, data tensors, initial model, codebook and optimizer settings.
+An interrupted phase can resume its saved epoch without overwriting the next
+phase's masks. Old phase-ambiguous recovery files are not loaded by this format;
+retain them locally for reference, or start a new work directory.
+
 ## Archive origin
 
-The continuous-sharing archive was produced in the 801 experiment workspace;
-the quantized engine and fixed-codebook paired evaluations were recovered from
-the 804 experiment workspace. Machine-local path and historical run identifiers
-remain inside the untouched JSON records where they help provenance, not in
-the public-facing directory layout. SHA-256 values for plot inputs are exported
+Machine-local paths and historical run identifiers remain inside the unchanged
+JSON records to preserve source provenance, not in the public-facing directory
+layout. SHA-256 values for plot inputs are exported
 to `paper_data/Fig5_Sharing_and_Quantization/source_hashes.json`.

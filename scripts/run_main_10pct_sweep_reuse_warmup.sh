@@ -12,12 +12,6 @@ LOG_DIR="results/${RESULT_PREFIX}_logs"
 CKPT_DIR="results/${RESULT_PREFIX}_ckpt"
 MERGED_JSON="results/${RESULT_PREFIX}_merged.json"
 
-if [[ ! -f "${SOURCE_WARMUP_CKPT}" ]]; then
-  echo "Missing warmup checkpoint: ${SOURCE_WARMUP_CKPT}" >&2
-  echo "Keep a completed warmup checkpoint, or adjust SOURCE_WARMUP_CKPT in this script." >&2
-  exit 1
-fi
-
 mkdir -p "${SHARD_DIR}" "${LOG_DIR}" "${CKPT_DIR}"
 rm -f "${SHARD_DIR}"/*.json "${LOG_DIR}"/*.log "${MERGED_JSON}"
 
@@ -77,6 +71,14 @@ COMMON_ARGS=(
   --warmup-checkpoint "${SOURCE_WARMUP_CKPT}"
 )
 
+if [[ ! -f "${SOURCE_WARMUP_CKPT}" ]]; then
+  echo "[warmup] generating a local checkpoint from public EMNIST inputs"
+  CUDA_VISIBLE_DEVICES=0 python -u train_mpu_pnn.py \
+    "${COMMON_ARGS[@]}" \
+    --output "results/main_10pct_generated_warmup.json" \
+    --ratios 0 --modes node_pruning --warmup-only --no-resume \
+    > "${LOG_DIR}/warmup.log" 2>&1
+fi
 echo "[reuse] using completed warmup checkpoint: ${SOURCE_WARMUP_CKPT}"
 
 pids=()

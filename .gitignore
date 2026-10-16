@@ -18,6 +18,10 @@ results/quantization_training/
 # Local run artifacts
 results/local_*.json
 results/local_*/
+results/demo/
+results/custom_features/
+results/validation/
+.pytest_cache/
 
 # OS/editor files
 .DS_Store

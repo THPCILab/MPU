@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Please cite the associated manuscript when using this research software."
+title: "MPU: Task-aware neuron-sharing photonic neural network"
+type: software
+authors:
+  - name: THPCILab
+repository-code: "https://github.com/THPCILab/MPU"
+license: MIT
+version: 1.0.0
+date-released: 2026-10-16
+abstract: "Code and numerical source data for continuous-operator sharing, finite-codebook quantization and modeled device errors in multi-task photonic computing."

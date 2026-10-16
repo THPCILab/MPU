@@ -1,7 +1,7 @@
-torch
-torchvision
-numpy
-scipy
-scikit-learn
-matplotlib
-pandas
+# CPU wheels on Linux/Windows. For CUDA, see docs/installation.md.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.0.1+cpu; sys_platform != "darwin"
+torchvision==0.15.2+cpu; sys_platform != "darwin"
+torch==2.0.1; sys_platform == "darwin"
+torchvision==0.15.2; sys_platform == "darwin"
+-r requirements-analysis.txt

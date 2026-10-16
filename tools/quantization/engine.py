@@ -10,7 +10,6 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
-from torchvision import datasets
 
 
 ROOT = Path(__file__).resolve().parent
@@ -66,6 +65,8 @@ def get_task_loaders(
     input_preprocess="learned",
     input_rank=64,
 ):
+    from torchvision import datasets
+
     specs = task_specs(task_set)
     raw_train = datasets.EMNIST(root=str(ROOT / "data"), split="byclass", train=True, download=download)
     raw_test = datasets.EMNIST(root=str(ROOT / "data"), split="byclass", train=False, download=download)
@@ -916,6 +917,8 @@ def train_model(
     device,
     capture_best_state=False,
     track_train_accuracy=False,
+    checkpoint_session=None,
+    training_phase="train",
 ):
     model.to(device)
     shared_optical_params = []
@@ -956,7 +959,22 @@ def train_model(
     task_hist = {str(tid): [] for tid in task_ids}
     best_state_dict = None
     best_seen = -1.0
-    for epoch in range(epochs):
+    start_epoch = 0
+    recovery_loaders = {"train_" + str(k): v for k, v in train_loaders.items()}
+    recovery_loaders.update({"test_" + str(k): v for k, v in test_loaders.items()})
+    if checkpoint_session is not None:
+        recovery = checkpoint_session.restore(model, optimizer, scheduler, recovery_loaders, device)
+        if recovery is not None:
+            start_epoch = recovery["epoch"]
+            history = recovery["histories"]
+            mean_hist = history["mean_hist"]
+            train_loss_hist = history["train_loss_hist"]
+            train_mean_hist = history["train_mean_hist"]
+            train_task_hist = history["train_task_hist"]
+            task_hist = history["task_hist"]
+            best_state_dict = history["best_state_dict"]
+            best_seen = history["best_seen"]
+    for epoch in range(start_epoch, epochs):
         model.train()
         if getattr(model, "freeze_electrical_runtime", False) and hasattr(model, "set_electrical_eval"):
             model.set_electrical_eval()
@@ -987,6 +1005,12 @@ def train_model(
             best_seen = mean_acc
             best_state_dict = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
         print(f"  epoch {epoch + 1:03d}/{epochs}: mean={mean_acc:.4f}")
+        if checkpoint_session is not None:
+            checkpoint_session.save(model, optimizer, scheduler, recovery_loaders, epoch + 1, {
+                "mean_hist": mean_hist, "train_loss_hist": train_loss_hist,
+                "train_mean_hist": train_mean_hist, "train_task_hist": train_task_hist,
+                "task_hist": task_hist, "best_state_dict": best_state_dict, "best_seen": best_seen,
+            })
     best_mean = max(mean_hist) if mean_hist else 0.0
     best_epoch = int(mean_hist.index(best_mean) + 1) if mean_hist else 0
     result = {
@@ -1223,6 +1247,7 @@ def run_condition(args, model, masks, train_loaders, test_loaders, task_ids, dev
         args.weight_decay,
         device,
         track_train_accuracy=args.track_train_accuracy,
+        training_phase="finetune",
     )
     result["mask_profile"] = mask_profile(masks)
     result["quantization_profile"] = quantization_profile(model, masks)
@@ -1411,6 +1436,7 @@ def run_experiment(args):
                 device,
                 capture_best_state=args.use_best_warmup_state,
                 track_train_accuracy=args.track_train_accuracy,
+                training_phase="warmup",
             )
             best_warmup_state = warmup_result.pop("_best_state_dict", None)
             if args.use_best_warmup_state and best_warmup_state is not None:

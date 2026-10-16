@@ -12,6 +12,7 @@ import hashlib
 import json
 import math
 import os
+import platform
 import sys
 from pathlib import Path
 
@@ -382,9 +383,10 @@ def main() -> None:
         "matrix_amplitude_scale": 10.0 ** (-loss_db / 20.0),
         "forward_semantics": "one fixed matrix per hard shared 3-bit codeword; the same table is held fixed during training and evaluation; shared gradients use the ideal 3-bit MZI STE path",
         "private_mzis": "continuous task-specific phases, unchanged and lossless in this model",
-        "phase_source": "nominal theta/phi grid; no measured optical phases are available",
+        "phase_source": "nominal theta/phi grid; no per-codeword measured phase population is supplied",
         "training_seeds": [int(args.seed)],
-        "execution_host": "server-804",
+        "execution_host": platform.node(),
+        "execution_platform": platform.platform(),
         "paired_voltage_noise": "same final QAT checkpoint plus 10 mV RMS equivalent phase error on active MZIs; 5 test-noise draws; no additional training",
     }
 
