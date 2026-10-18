@@ -10,8 +10,8 @@ from figure_inputs import pattern_ratios, prepare_payload
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT = "data/main_10pct_sweep.json"
-DEFAULT_FIG_DIR = "results/analysis_panels"
-DEFAULT_OUT_DIR = "data/figure_exports/fig5"
+DEFAULT_FIG_DIR = "results/generated/fig5"
+DEFAULT_OUT_DIR = "results/generated/fig5/source_data"
 
 
 def load_payload(path):
@@ -86,7 +86,7 @@ def export_fig1(cond, fig_dir, root):
             **optional,
         },
     )
-    copy_figures(fig_dir, folder, "fig1_main_accuracy_curve", "fig5.c_accuracy")
+    copy_figures(fig_dir, folder, "fig5c_accuracy", "fig5.c_accuracy")
     write_readme(
         folder / "README.md",
         "Fig. 5c: accuracy retention under MPU replacement",
@@ -110,7 +110,7 @@ def export_fig2(payload, cond, fig_dir, root):
             data[f"{prefix}_task{task_id}_confusion_counts"] = np.array(item["counts"], dtype=float)
             data[f"{prefix}_task{task_id}_accuracy_percent"] = np.array([[100.0 * float(item["accuracy"])]])
     savemat(folder / "fig5.e_source_data.mat", data)
-    copy_figures(fig_dir, folder, "fig2_confusion_90pct", "fig5.e_confusion")
+    copy_figures(fig_dir, folder, "fig5e_confusion", "fig5.e_confusion")
     write_readme(
         folder / "README.md",
         "Fig. 5e: 90% shared MPU confusion matrices",
@@ -152,7 +152,7 @@ def export_fig3(payload, cond, fig_dir, root):
     if "train_mean_hist" in node:
         data["node_level_mean_train_accuracy_percent"] = np.array(node["train_mean_hist"], dtype=float) * 100.0
     savemat(folder / "figure_data.mat", data)
-    copy_figures(fig_dir, folder, "fig3_convergence_90pct", "convergence_90pct")
+    copy_figures(fig_dir, folder, "sharing_convergence", "convergence_90pct")
     write_readme(
         folder / "README.md",
         "Additional analysis: warmup and 90% neuron-level sharing convergence",
@@ -174,7 +174,7 @@ def export_fig4(cond, fig_dir, root):
             data[f"{prefix}_{ratio}pct_even_stage_pair_mask"] = np.array(mask["even"], dtype=np.uint8)
             data[f"{prefix}_{ratio}pct_odd_stage_pair_mask"] = np.array(mask["odd"], dtype=np.uint8)
     savemat(folder / "figure_data.mat", data)
-    copy_figures(fig_dir, folder, "fig4_sharing_patterns", "sharing_patterns")
+    copy_figures(fig_dir, folder, "sharing_patterns", "sharing_patterns")
     write_readme(
         folder / "README.md",
         "Additional analysis: archived MPU sharing patterns",

@@ -47,6 +47,6 @@ python train_mpu_pnn.py ^
   --output results\local_medium.json ^
   --no-resume
 
-python tools\plot_nature_figures.py --input results\local_medium.json --out-dir results\analysis_panels
+python tools\plot_nature_figures.py --input results\local_medium.json --out-dir results\generated\local_medium
 
 endlocal

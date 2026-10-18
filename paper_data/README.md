@@ -5,14 +5,14 @@ numerical tables, with one worksheet per figure. Units are given in column heade
 
 | Main-text panel | Data |
 | --- | --- |
-| Fig. 2b | Theta–phi points and precision histogram counts |
-| Fig. 2c | Power comparisons at 1550 nm |
-| Fig. 2d | Transmission spectra |
-| Fig. 3a | Non-unitary operator comparisons |
-| Fig. 3b | Cascade power comparisons |
-| Fig. 3c | Reference/MPU scans and matrix comparisons |
+| Fig. 2b | Simulated theta–phi fits and simulation/experiment precision histograms |
+| Fig. 2c | Target and measured power coefficients at 1550 nm (dB) |
+| Fig. 2d | Transmission spectra over 1520–1580 nm |
+| Fig. 3a | Normalized powers of five non-unitary operators |
+| Fig. 3b | Column-normalized cascade power comparisons |
+| Fig. 3c | Reference/MPU scans and amplitude–phase comparisons |
 | Fig. 4b | Single-task and dual-task training curves |
-| Fig. 4c | Confusion matrices |
-| Fig. 5c | Sharing-ratio accuracy curves |
-| Fig. 5d | Quantization accuracy curves |
+| Fig. 4c | Training and held-out test confusion matrices |
+| Fig. 5c | Continuous-operator node-/stage-sharing accuracy |
+| Fig. 5d | Software QAT/PTQ and modeled device-error accuracy |
 | Fig. 5e | Confusion matrices |

@@ -128,7 +128,8 @@ def main():
         color="#344054",
     )
 
-    out = ROOT / "results" / "single_mesh_architecture"
+    out = ROOT / "results/generated/single_mesh_architecture"
+    out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out.with_suffix(".png"), dpi=300, bbox_inches="tight")
     fig.savefig(out.with_suffix(".pdf"), bbox_inches="tight")
     print(f"Saved {out.with_suffix('.png')}")

@@ -22,6 +22,7 @@ results/demo/
 results/fig4_training/
 results/custom_features/
 results/validation/
+results/generated/
 .pytest_cache/
 
 # OS/editor files

@@ -153,11 +153,11 @@ python tools/merge_shards.py \
 
 python tools/plot_nature_figures.py \
   --input "${MERGED_JSON}" \
-  --out-dir results/analysis_panels
+  --out-dir results/generated/fig5
 
 python tools/export_figure_data.py \
   --input "${MERGED_JSON}" \
-  --fig-dir results/analysis_panels \
-  --out-dir paper_data
+  --fig-dir results/generated/fig5 \
+  --out-dir results/generated/fig5/source_data
 
 echo "Done. Main 10%-step single-mesh sweep JSON: ${MERGED_JSON}"

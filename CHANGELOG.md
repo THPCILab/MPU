@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Add final plotting tables for manuscript Figures 2–4 and the source-data workbook.
+- Clarify that installation, demo and computational reproduction concern Figure 5.
+- Remove duplicate preview/MAT exports; generate them under ignored results directories.
+- Use manuscript panel identifiers for regenerated Figure 5 plots.
+
 ## 1.0.0 — 2026-10-16
 
 - Separate warmup and fine-tuning recovery by training phase, sharing masks,

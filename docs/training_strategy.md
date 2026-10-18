@@ -2,7 +2,7 @@
 
 ## 1. Research Goal
 
-The continuous-operator software experiment evaluates fine-grained MPU sharing in multi-task photonic neural networks. A passive two-mode MPU offers a compact alternative to a tunable MZI, while retained task-private MZIs provide adaptation. Finite-codebook deployment is evaluated separately in the quantization study described in [Figure 5 source data](fig5_reproducibility.md).
+The continuous-operator software experiment evaluates fine-grained MPU sharing in multi-task photonic neural networks. A passive two-mode MPU offers a compact alternative to a tunable MZI, while retained task-private MZIs provide adaptation. Finite-codebook deployment is evaluated separately in the quantization study described in [Figure 5 reproduction](reproduction.md).
 
 In the experiment, a shared MPU is still trainable during offline design. After the sharing pattern and common 2-to-2 transfer matrix are learned, the corresponding MZI neuron is interpreted as a passive MPU in deployment.
 

@@ -81,8 +81,8 @@ def validated_runs():
 
 
 def export(runs, summary, checked, out=None):
-    archive = Path(out) if out is not None else ROOT / "data/figure_exports/fig5"
-    out = Path(out) if out is not None else ROOT / "paper_data/fig5"
+    archive = Path(out) if out is not None else ROOT / "results/generated/fig5/source_data"
+    out = archive
     out.mkdir(parents=True, exist_ok=True)
     archive.mkdir(parents=True, exist_ok=True)
     (archive / "fig5.d").mkdir(parents=True, exist_ok=True)
@@ -128,13 +128,13 @@ def draw(summary, output=None):
         ls = "--" if condition == "3-bit PTQ" else ("-." if condition == ORDER[6] else (":" if condition == ORDER[7] else "-"))
         ax.plot(sub.sharing_ratio * 100, sub.mean_accuracy_percent, color=color,
                 marker=marker, linestyle=ls, linewidth=1.7, markersize=5, label=label)
-    ax.set(xlabel="Shared-MZI ratio (%)", ylabel="Test accuracy (%)",
+    ax.set(xlabel="MPU replacement ratio (%)", ylabel="Test accuracy (%)",
            title="64×64 Clements: operator quantization and device errors",
            xlim=(16, 94), ylim=(0, 100), xticks=[20, 40, 60, 80, 90])
     ax.grid(axis="y", color="#E5E8EF", linewidth=.7)
     ax.legend(loc="upper center", bbox_to_anchor=(.5, -.20), ncol=2,
               frameon=False, fontsize=8.5)
-    output = Path(output) if output is not None else ROOT / "results/analysis_panels"
+    output = Path(output) if output is not None else ROOT / "results/generated/fig5"
     output.mkdir(parents=True, exist_ok=True)
     fig.savefig(output / "fig5d_quantization.pdf")
     fig.savefig(output / "fig5d_quantization.png", dpi=220)

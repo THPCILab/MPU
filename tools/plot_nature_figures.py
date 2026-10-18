@@ -139,7 +139,7 @@ def plot_main_curve(payload, out_dir):
     #     fontsize=13,
     #     #arrowprops=dict(arrowstyle="->", color=diff_color, lw=1.6, linestyle=(0, (3, 2)), shrinkA=4, shrinkB=3),
     # )
-    save(fig, out_path(out_dir, "fig1", "main_accuracy_curve"))
+    save(fig, out_path(out_dir, "fig5c", "accuracy"))
     plt.close(fig)
 
 
@@ -194,7 +194,7 @@ def plot_confusion(payload, out_dir):
     cbar = fig.colorbar(im, ax=axes.ravel().tolist(), shrink=0.86, pad=0.015)
     cbar.set_label("Row-normalized samples (%)", weight="bold")
     fig.suptitle("90% Shared MPU Confusion Matrices", fontsize=18, weight="bold")
-    save(fig, out_path(out_dir, "fig2", "confusion_90pct"))
+    save(fig, out_path(out_dir, "fig5e", "confusion"))
     plt.close(fig)
 
 
@@ -310,7 +310,7 @@ def plot_convergence(payload, out_dir):
     ax_loss.spines["top"].set_visible(False)
     ax_acc.legend(handles=handles, frameon=False, loc="center right")
     ax_loss.tick_params(axis="y", colors=DARK)
-    save(fig, out_path(out_dir, "fig3", "convergence_90pct"))
+    save(fig, out_path(out_dir, "sharing", "convergence"))
     plt.close(fig)
 
 
@@ -338,7 +338,7 @@ def draw_mesh(ax, mask_layer, shared_color="#9AA4B2", private_color=NODE):
         spine.set_linewidth(0.65)
 
 
-def plot_patterns(payload, out_dir, ratios=None, stem="fig4", main_title="Shared MPU Pattern Across Replacement Ratios"):
+def plot_patterns(payload, out_dir, ratios=None, stem="sharing", main_title="Shared MPU Pattern Across Replacement Ratios"):
     cond = condition(payload)
     ratios = pattern_ratios(cond, ratios)
     if not ratios:
@@ -361,14 +361,14 @@ def plot_patterns(payload, out_dir, ratios=None, stem="fig4", main_title="Shared
     ]
     fig.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.55, 0.955), ncol=2, frameon=False, fontsize=16)
     fig.suptitle(main_title, fontsize=22, weight="bold", y=0.97,x=0.55)
-    save(fig, out_path(out_dir, stem, "sharing_patterns"))
+    save(fig, out_path(out_dir, stem, "patterns"))
     plt.close(fig)
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default=DEFAULT_INPUT)
-    parser.add_argument("--out-dir", default="results/analysis_panels")
+    parser.add_argument("--out-dir", default="results/generated/fig5")
     parser.add_argument("--warmup-input", help="Optional matching full warmup JSON")
     args = parser.parse_args()
     configure()
@@ -379,7 +379,7 @@ def main():
     plot_confusion(payload, out_dir)
     plot_convergence(payload, out_dir)
     plot_patterns(payload, out_dir)
-    plot_patterns(payload, out_dir, ratios=[20, 40, 60, 80], stem="fig4_even", main_title="Shared MPU Pattern Across Even Replacement Ratios")
+    plot_patterns(payload, out_dir, ratios=[20, 40, 60, 80], stem="sharing_even", main_title="Shared MPU Pattern Across Even Replacement Ratios")
 
 
 if __name__ == "__main__":
