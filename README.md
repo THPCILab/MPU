@@ -43,7 +43,7 @@ residuals and a prospective 90% MPU transmission condition.
 │   └── run_fig5_device_errors.py  # Fixed-codebook CUDA reproduction
 ├── data/                          # Final JSON data used for figures
 ├── results/                       # Publication figures
-├── paper_data/                    # Panel-labelled CSV/MAT files and Source_Data.xlsx
+├── paper_data/                    # Final panel-labelled CSVs and Source_Data.xlsx
 └── docs/
     ├── training_strategy.md       # Continuous-sharing method
     └── fig5_reproducibility.md    # Panel mapping and quantization protocol
@@ -144,18 +144,10 @@ training example, not the quick demo.
 
 ## Manuscript Source Data
 
-Numerical sources use manuscript panel names, for example
-`paper_data/fig3/fig3.a/`, `paper_data/fig3/fig3.b/`,
-`paper_data/fig3/fig3.c/`, `paper_data/fig4/fig4.c/` and
-`paper_data/fig5/fig5.c/`.
-`paper_data/Source_Data.xlsx` has one sheet per figure and matches the
-panel-labelled UTF-8 CSV files. See [coverage and provenance](paper_data/README.md).
-Fig3 contains final normalized operator comparisons and measured scan points,
-with model fits stored separately; see [Figure 3 data](paper_data/fig3/README.md).
-Fig4.c contains counts transcribed from the supplied figure; no sample-level
-predictions are reconstructed. [Fig4.b training curves](paper_data/fig4/fig4.b/README.md)
-include the supplied single-task and dual-task histories, with loss values and
-the original JSON arrays. Validate or redraw them using `tools/plot_fig4_training.py`.
+Final numerical tables are in [paper_data](paper_data/README.md), grouped by
+main-text figure panel. `Source_Data.xlsx` has one worksheet per figure.
+Supporting model parameters and optional MATLAB/preview exports are kept under
+`data/`, separately from the final plotting tables.
 
 ## Method Summary
 

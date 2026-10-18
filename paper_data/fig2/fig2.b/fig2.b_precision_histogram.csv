@@ -1,0 +1,15 @@
+series,bin_left_bits,bin_right_bits,device_count,reported_mean_bits
+Simulation results,4.0,5.0,4,7.1
+Simulation results,5.0,6.0,11,7.1
+Simulation results,6.0,7.0,14,7.1
+Simulation results,7.0,8.0,18,7.1
+Simulation results,8.0,9.0,11,7.1
+Simulation results,9.0,10.0,6,7.1
+Experimental results,0.0,1.0,4,3.32
+Experimental results,1.0,2.0,13,3.32
+Experimental results,2.0,3.0,16,3.32
+Experimental results,3.0,4.0,11,3.32
+Experimental results,4.0,5.0,7,3.32
+Experimental results,5.0,6.0,7,3.32
+Experimental results,6.0,7.0,4,3.32
+Experimental results,7.0,8.0,2,3.32

@@ -11,7 +11,7 @@ from figure_inputs import pattern_ratios, prepare_payload
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT = "data/main_10pct_sweep.json"
 DEFAULT_FIG_DIR = "results/analysis_panels"
-DEFAULT_OUT_DIR = "paper_data/fig5"
+DEFAULT_OUT_DIR = "data/figure_exports/fig5"
 
 
 def load_payload(path):

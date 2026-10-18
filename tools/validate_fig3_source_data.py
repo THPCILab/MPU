@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1] / "paper_data/fig3"
+METADATA = Path(__file__).resolve().parents[1] / "data/fig3/source_tables"
 
 
 def read_csv(relative):
@@ -29,7 +30,7 @@ def validate():
                 assert np.isfinite(values).all() and (values >= 0).all()
                 np.testing.assert_allclose(values.max(), 1, atol=1e-12)
     folder = "fig3.c/"
-    model = json.loads((ROOT / folder / "fig3.c_model.json").read_text(encoding="utf-8"))
+    model = json.loads((METADATA / folder / "fig3.c_model.json").read_text(encoding="utf-8"))
     scan = read_csv(folder + "fig3.c_scan.csv")
     dense = read_csv(folder + "fig3.c_dense_fits.csv")
     assert len(scan) == 84 and len(dense) == 2400
@@ -72,7 +73,7 @@ def validate():
         z = complex(float(row["real"]), float(row["imag"]))
         np.testing.assert_allclose(abs(z), float(row["amplitude"]), atol=1e-12)
         np.testing.assert_allclose(abs(z)**2, float(row["power"]), atol=1e-12)
-    provenance = json.loads((ROOT / "provenance.json").read_text(encoding="utf-8"))
+    provenance = json.loads((METADATA / "provenance.json").read_text(encoding="utf-8"))
     for record in provenance["files"]:
         assert hashlib.sha256((ROOT / record["file"]).read_bytes()).hexdigest() == record["sha256"]
     print("PASS: Fig3.a/b final values; 84 measured currents; 2400 fitted values; 16 matrix elements; hashes.")

@@ -1,28 +1,18 @@
-# Manuscript source data
+# Source data
 
-Folders and filenames follow manuscript figure panels: `fig3.a`--`fig3.c`, `fig4.b`, `fig4.c`, `fig5.a`,
-`fig5.b`, `fig5.c`, `fig5.d` and `fig5.e`. This avoids the previous
-analysis-only Fig1--Fig4 numbering, which did not refer to manuscript figures.
+Folders follow the main-text figure panels. `Source_Data.xlsx` contains the same
+numerical tables, with one worksheet per figure. Units are given in column headers.
 
-- `Source_Data.xlsx`: one worksheet per manuscript figure, with clearly
-  labelled panel blocks, variable names and units.
-- `fig3/`: final non-unitary/cascade comparisons, measured reference/MPU
-  scans, fitted curves and complex-matrix comparisons. See the panel README
-  for normalization and phase conventions; the field-map array is not included.
-- `fig4/`: Fig4.b archived training curves and Fig4.c confusion counts
-  transcribed from the supplied artwork.
-- `fig5/`: archived continuous-sharing, quantization and confusion-matrix data.
-- `fig5/additional_analyses/`: convergence and mask analyses, not additional
-  manuscript figures.
-
-CSV files are UTF-8, with one header row, numeric values in numeric columns and
-explicit count/fraction/percentage units. Raw integer confusion counts are
-retained; missing sample SD is not replaced by zero.
-The workbook and CSVs have the same numerical values.
-
-Rebuild the Fig4.b/c and Fig5.c/e CSVs with `python tools/export_manuscript_source_data.py`.
-Validate the supplied Fig3 numerical tables with `python tools/validate_fig3_source_data.py`.
-Quantization exports are generated with `python tools/plot_fig5_quantization.py`.
-Current quantitative coverage is Fig3.a--c (excluding the field-map array),
-Fig4.b/c and Fig5.c--e; this is not yet a complete
-source-data package for every manuscript figure.
+| Main-text panel | Data |
+| --- | --- |
+| Fig. 2b | Theta–phi points and precision histogram counts |
+| Fig. 2c | Power comparisons at 1550 nm |
+| Fig. 2d | Transmission spectra |
+| Fig. 3a | Non-unitary operator comparisons |
+| Fig. 3b | Cascade power comparisons |
+| Fig. 3c | Reference/MPU scans and matrix comparisons |
+| Fig. 4b | Single-task and dual-task training curves |
+| Fig. 4c | Confusion matrices |
+| Fig. 5c | Sharing-ratio accuracy curves |
+| Fig. 5d | Quantization accuracy curves |
+| Fig. 5e | Confusion matrices |
