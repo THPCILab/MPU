@@ -1,0 +1,5 @@
+task,split,samples,correct,accuracy_percent,displayed_accuracy_percent
+A,train,192,164,85.41666666666667,85.42
+A,test,168,140,83.33333333333333,83.33
+B,train,192,161,83.85416666666667,83.85
+B,test,168,135,80.35714285714286,80.36

@@ -11,7 +11,7 @@ from figure_inputs import pattern_ratios, prepare_payload
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_INPUT = "data/main_10pct_sweep.json"
 DEFAULT_FIG_DIR = "results/analysis_panels"
-DEFAULT_OUT_DIR = "paper_data"
+DEFAULT_OUT_DIR = "paper_data/fig5"
 
 
 def load_payload(path):
@@ -45,11 +45,11 @@ def sorted_curve_rows(cond):
     return rows
 
 
-def copy_figures(fig_dir, out_dir, stem):
+def copy_figures(fig_dir, out_dir, stem, target_stem=None):
     for ext in [".pdf", ".png"]:
         src = fig_dir / f"{stem}{ext}"
         if src.exists():
-            shutil.copy2(src, out_dir / src.name)
+            shutil.copy2(src, out_dir / ((target_stem or stem) + ext))
 
 
 def write_readme(path, title, body):
@@ -58,7 +58,7 @@ def write_readme(path, title, body):
 
 
 def export_fig1(cond, fig_dir, root):
-    folder = root / "Fig1_Accuracy_Retention_Under_MPU_Replacement"
+    folder = root / "fig5.c"
     folder.mkdir(parents=True, exist_ok=True)
     rows = sorted_curve_rows(cond)
     ratios = np.array([100.0 * r[0] for r in rows], dtype=float)
@@ -76,7 +76,7 @@ def export_fig1(cond, fig_dir, root):
         i = indices[0]
         optional["gain_at_90pct_percentage_points"] = np.array([[node_best[i] - layer_best[i]]])
     savemat(
-        folder / "figure_data.mat",
+        folder / "fig5.c_source_data.mat",
         {
             "shared_mpu_ratio_percent": ratios,
             "node_level_best_accuracy_percent": node_best,
@@ -86,10 +86,10 @@ def export_fig1(cond, fig_dir, root):
             **optional,
         },
     )
-    copy_figures(fig_dir, folder, "fig1_main_accuracy_curve")
+    copy_figures(fig_dir, folder, "fig1_main_accuracy_curve", "fig5.c_accuracy")
     write_readme(
         folder / "README.md",
-        "Fig. 1 Accuracy retention under MPU replacement",
+        "Fig. 5c: accuracy retention under MPU replacement",
         "Data are test accuracies in percent. Endpoint and 90% gain fields are included only when that ratio exists.",
     )
 
@@ -98,7 +98,7 @@ def export_fig2(payload, cond, fig_dir, root):
     if "0.90" not in cond["curves"]:
         print("Skipping 90% confusion export: ratio not present.")
         return
-    folder = root / "Fig2_90pct_Shared_MPU_Confusion_Matrices"
+    folder = root / "fig5.e"
     folder.mkdir(parents=True, exist_ok=True)
     names = task_names(payload)
     data = {"task_names": names}
@@ -109,11 +109,11 @@ def export_fig2(payload, cond, fig_dir, root):
             data[f"{prefix}_task{task_id}_confusion_normalized_percent"] = np.array(item["normalized"], dtype=float) * 100.0
             data[f"{prefix}_task{task_id}_confusion_counts"] = np.array(item["counts"], dtype=float)
             data[f"{prefix}_task{task_id}_accuracy_percent"] = np.array([[100.0 * float(item["accuracy"])]])
-    savemat(folder / "figure_data.mat", data)
-    copy_figures(fig_dir, folder, "fig2_confusion_90pct")
+    savemat(folder / "fig5.e_source_data.mat", data)
+    copy_figures(fig_dir, folder, "fig2_confusion_90pct", "fig5.e_confusion")
     write_readme(
         folder / "README.md",
-        "Fig. 2 90% shared MPU confusion matrices",
+        "Fig. 5e: 90% shared MPU confusion matrices",
         "Each normalized confusion matrix is row-normalized and stored in percent. "
         "Task IDs are 0=Digits, 1=Uppercase, 2=Lowercase.",
     )
@@ -123,7 +123,7 @@ def export_fig3(payload, cond, fig_dir, root):
     if "0.90" not in cond["curves"]:
         print("Skipping 90% convergence export: ratio not present.")
         return
-    folder = root / "Fig3_90pct_Neuron_Level_Convergence"
+    folder = root / "additional_analyses/convergence_90pct"
     folder.mkdir(parents=True, exist_ok=True)
     warmup = cond.get("warmup") or {}
     node = cond["curves"]["0.90"]["node_pruning"]
@@ -152,10 +152,10 @@ def export_fig3(payload, cond, fig_dir, root):
     if "train_mean_hist" in node:
         data["node_level_mean_train_accuracy_percent"] = np.array(node["train_mean_hist"], dtype=float) * 100.0
     savemat(folder / "figure_data.mat", data)
-    copy_figures(fig_dir, folder, "fig3_convergence_90pct")
+    copy_figures(fig_dir, folder, "fig3_convergence_90pct", "convergence_90pct")
     write_readme(
         folder / "README.md",
-        "Fig. 3 warmup and 90% neuron-level sharing convergence",
+        "Additional analysis: warmup and 90% neuron-level sharing convergence",
         "The plotted left-axis data are per-task test accuracies in percent; "
         "the right-axis data are training loss. The full warmup segment is loaded from the "
         "standalone warmup JSON because the main sweep reused the saved warmup checkpoint.",
@@ -163,7 +163,7 @@ def export_fig3(payload, cond, fig_dir, root):
 
 
 def export_fig4(cond, fig_dir, root):
-    folder = root / "Fig4_MPU_Sharing_Patterns"
+    folder = root / "additional_analyses/sharing_patterns"
     folder.mkdir(parents=True, exist_ok=True)
     ratios = pattern_ratios(cond)
     data = {"shared_mpu_ratio_percent": np.array(ratios, dtype=float)}
@@ -174,10 +174,10 @@ def export_fig4(cond, fig_dir, root):
             data[f"{prefix}_{ratio}pct_even_stage_pair_mask"] = np.array(mask["even"], dtype=np.uint8)
             data[f"{prefix}_{ratio}pct_odd_stage_pair_mask"] = np.array(mask["odd"], dtype=np.uint8)
     savemat(folder / "figure_data.mat", data)
-    copy_figures(fig_dir, folder, "fig4_sharing_patterns")
+    copy_figures(fig_dir, folder, "fig4_sharing_patterns", "sharing_patterns")
     write_readme(
         folder / "README.md",
-        "Fig. 4 MPU sharing patterns",
+        "Additional analysis: archived MPU sharing patterns",
         "Mask value 1 means shared MPU and 0 means task-private MZI. "
         "Even and odd arrays are stored as physical stage-by-pair masks for the single Clements mesh.",
     )
@@ -205,10 +205,11 @@ def main():
 
     write_readme(
         out_dir / "README.md",
-        "Figure source data",
-        "The Fig1--Fig4 folders contain individual analysis plots, not manuscript figure "
-        "numbers. Each contains a PDF/PNG and `figure_data.mat`. Manuscript Fig. 5 "
-        "source data are in `Fig5_Sharing_and_Quantization/`.",
+        "Manuscript Figure 5 source data",
+        "Subdirectories use manuscript panel identifiers (fig5.a--fig5.e). "
+        "The additional_analyses folder contains convergence and mask analyses "
+        "that are not additional main-manuscript figures. "
+        "Run tools/export_manuscript_source_data.py for the panel CSV files.",
     )
     print(f"Wrote data package to {out_dir}")
 

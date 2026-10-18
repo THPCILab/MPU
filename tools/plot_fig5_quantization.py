@@ -81,10 +81,11 @@ def validated_runs():
 
 
 def export(runs, summary, checked, out=None):
-    out = Path(out) if out is not None else ROOT / "paper_data/Fig5_Sharing_and_Quantization"
+    out = Path(out) if out is not None else ROOT / "paper_data/fig5"
     out.mkdir(parents=True, exist_ok=True)
-    runs.to_csv(out / "panel_d_runs.csv", index=False)
-    summary.to_csv(out / "panel_d_summary.csv", index=False)
+    (out / "fig5.d").mkdir(parents=True, exist_ok=True)
+    runs.to_csv(out / "fig5.d/fig5.d_runs.csv", index=False)
+    summary.to_csv(out / "fig5.d/fig5.d_summary.csv", index=False)
     means = np.vstack([summary[summary.condition == c].sort_values("sharing_ratio").mean_accuracy_percent for c in ORDER])
     sd = np.vstack([summary[summary.condition == c].sort_values("sharing_ratio").sample_sd_percent for c in ORDER])
     counts = np.vstack([summary[summary.condition == c].sort_values("sharing_ratio").training_seed_count for c in ORDER])
@@ -102,9 +103,11 @@ def export(runs, summary, checked, out=None):
             cm = curves["0.90"][mode]["confusion_matrices"][tid]
             mat[f"panel_e_{prefix}_task{tid}_counts"] = np.asarray(cm["counts"])
             mat[f"panel_e_{prefix}_task{tid}_normalized_percent"] = np.asarray(cm["normalized"]) * 100
-    savemat(out / "figure_data.mat", mat)
-    for name in ["Fig5.pdf", "main_figure.png"]:
-        shutil.copy2(ROOT / "results" / name, out / name)
+    savemat(out / "fig5_source_data.mat", mat)
+    savemat(out / "fig5.d/fig5.d_source_data.mat",
+            {key: value for key, value in mat.items() if key.startswith("panel_d_")})
+    for name, target in [("Fig5.pdf", "fig5.pdf"), ("main_figure.png", "fig5.png")]:
+        shutil.copy2(ROOT / "results" / name, out / target)
     hashes = dict(checked)
     hashes["../main_10pct_sweep.json"] = hashlib.sha256((ROOT / "data/main_10pct_sweep.json").read_bytes()).hexdigest()
     hashes["device_runs/codebook_static_3bit_eps_2pow_minus332_losst90pct.npz"] = hashlib.sha256((DATA / "device_runs/codebook_static_3bit_eps_2pow_minus332_losst90pct.npz").read_bytes()).hexdigest()

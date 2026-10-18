@@ -1,0 +1,47 @@
+{
+  "panel": "fig4.c",
+  "data_type": "integer_confusion_counts",
+  "source_type": "transcribed_from_supplied_manuscript_figure",
+  "source_filename": "Main_Fig04_hil_tasks.pdf",
+  "source_sha256": "01f831b228a9a8254e9ac562cafeeb9eefd0003c762d521b9618a98fa24405d7",
+  "rows": "true label",
+  "columns": "predicted label",
+  "matrices": [
+    {
+      "task": "A",
+      "split": "train",
+      "labels": ["hid", "hEd", "had", "hOd"],
+      "counts": [[41, 3, 0, 4], [7, 40, 1, 0], [0, 1, 42, 5], [0, 2, 5, 41]],
+      "samples": 192,
+      "correct": 164,
+      "displayed_accuracy_percent": 85.42
+    },
+    {
+      "task": "A",
+      "split": "test",
+      "labels": ["hid", "hEd", "had", "hOd"],
+      "counts": [[39, 0, 0, 3], [0, 35, 0, 7], [0, 0, 38, 4], [0, 2, 12, 28]],
+      "samples": 168,
+      "correct": 140,
+      "displayed_accuracy_percent": 83.33
+    },
+    {
+      "task": "B",
+      "split": "train",
+      "labels": ["hId", "hed", "hAd", "hod"],
+      "counts": [[44, 1, 2, 1], [2, 38, 7, 1], [1, 7, 39, 1], [3, 2, 3, 40]],
+      "samples": 192,
+      "correct": 161,
+      "displayed_accuracy_percent": 83.85
+    },
+    {
+      "task": "B",
+      "split": "test",
+      "labels": ["hId", "hed", "hAd", "hod"],
+      "counts": [[38, 0, 2, 2], [0, 35, 7, 0], [0, 8, 34, 0], [0, 0, 14, 28]],
+      "samples": 168,
+      "correct": 135,
+      "displayed_accuracy_percent": 80.36
+    }
+  ]
+}

@@ -14,11 +14,12 @@
 - **(e)** Confusion matrices at 90% continuous sharing:
   `data/main_10pct_sweep.json`.
 
-`paper_data/Fig5_Sharing_and_Quantization/figure_data.mat` contains the numerical
+`paper_data/fig5/fig5_source_data.mat` contains the numerical
 curves for panels (c,d) and the confusion matrices for panel (e). The run-level
 CSV retains the selected metric and seed; the summary CSV retains sample SD and
-training-seed count. The existing Fig1--Fig4 export folders are individual
-analysis plots, not the manuscript figure numbers.
+training-seed count. Subdirectories `fig5.a` through `fig5.e` follow the
+manuscript panels. Convergence and archived mask plots are kept in
+`additional_analyses/`, not assigned misleading main-figure numbers.
 
 ## Rebuild and verify panel (d)
 
@@ -110,4 +111,4 @@ retain them locally for reference, or start a new work directory.
 Machine-local paths and historical run identifiers remain inside the unchanged
 JSON records to preserve source provenance, not in the public-facing directory
 layout. SHA-256 values for plot inputs are exported
-to `paper_data/Fig5_Sharing_and_Quantization/source_hashes.json`.
+to `paper_data/fig5/source_hashes.json`.

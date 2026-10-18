@@ -49,9 +49,9 @@ class FigureInputTests(unittest.TestCase):
             exporter.export_fig2(payload, cond, out, out)
             exporter.export_fig3(payload, cond, out, out)
             exporter.export_fig4(cond, out, out)
-            mat = loadmat(out / "Fig1_Accuracy_Retention_Under_MPU_Replacement/figure_data.mat")
+            mat = loadmat(out / "fig5.c/fig5.c_source_data.mat")
             self.assertNotIn("gain_at_90pct_percentage_points", mat)
-            patterns = loadmat(out / "Fig4_MPU_Sharing_Patterns/figure_data.mat")
+            patterns = loadmat(out / "additional_analyses/sharing_patterns/figure_data.mat")
             self.assertEqual(patterns["shared_mpu_ratio_percent"].tolist(), [[20., 40., 60., 80.]])
 
     def test_one_ratio_no_endpoints_no_requested_even_patterns(self):

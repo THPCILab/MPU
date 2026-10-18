@@ -43,7 +43,7 @@ residuals and a prospective 90% MPU transmission condition.
 │   └── run_fig5_device_errors.py  # Fixed-codebook CUDA reproduction
 ├── data/                          # Final JSON data used for figures
 ├── results/                       # Publication figures
-├── paper_data/                    # Figure source data in MATLAB format
+├── paper_data/                    # Panel-labelled CSV/MAT files and Source_Data.xlsx
 └── docs/
     ├── training_strategy.md       # Continuous-sharing method
     └── fig5_reproducibility.md    # Panel mapping and quantization protocol
@@ -141,6 +141,15 @@ See [Reproducibility](docs/reproducibility.md) and
 [Fig. 5 protocols](docs/fig5_reproducibility.md) for full training and seeds.
 Full EMNIST retraining is GPU-intensive; `run_local_medium.cmd` is a medium
 training example, not the quick demo.
+
+## Manuscript Source Data
+
+Numerical sources use manuscript panel names, for example
+`paper_data/fig5/fig5.c/` and `paper_data/fig4/fig4.c/`.
+`paper_data/Source_Data.xlsx` has one sheet per figure and matches the
+panel-labelled UTF-8 CSV files. See [coverage and provenance](paper_data/README.md).
+Fig4.c contains counts transcribed from the supplied figure; no sample-level
+predictions are reconstructed. Fig4.b curve sources are still being identified.
 
 ## Method Summary
 
