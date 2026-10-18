@@ -29,8 +29,11 @@ class RepositoryLayoutTests(unittest.TestCase):
 
     def test_repository_scope_is_explicit(self):
         text = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("**Figure 5:**", text)
-        self.assertIn("**Figures 2–4:**", text)
+        self.assertIn("**Figure 5**", text)
+        self.assertIn("**Figures 2–4**", text)
+        self.assertIn("](results/MPU.png)", text)
+        self.assertIn("](results/main_figure.png)", text)
+        self.assertIn("## Training workflow", text)
         for filename in ("requirements.txt", "LICENSE", "CITATION.cff",
                          "docs/installation.md", "docs/reproduction.md", "docs/custom_data.md"):
             self.assertTrue((ROOT / filename).is_file())
