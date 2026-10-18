@@ -1,0 +1,50 @@
+{
+  "handoff_archive": "Matrix_figure_data_handoff_20261018.zip",
+  "handoff_sha256": "db2157269ef5f428a1c7395532403bc4881f86cbac8c9a138cd5018516d2575a",
+  "source_notebook": "AMF_chip_exp.ipynb",
+  "source_notebook_sha256": "9d44adf328d797a589d2693350e123c6f788fdbf066fc286c396e63cdca2897e",
+  "zero_based_cells": {
+    "fig3.a": 53,
+    "fig3.b": 39,
+    "fig3.c_currents": 103,
+    "fig3.c_target": 114
+  },
+  "files": [
+    {
+      "file": "fig3.a/fig3.a_values.csv",
+      "handoff_file": "data/panel_a_2x2_values.csv",
+      "handoff_file_sha256": "0251bb7064258e85f31fa672fb01540d49338132360ddb74317ed53572817c7a",
+      "sha256": "224b8549fa2d136b79bb8b3477254b6a0b0ec4cb7257ba8c62ed65554095420f"
+    },
+    {
+      "file": "fig3.b/fig3.b_values.csv",
+      "handoff_file": "data/panel_b_4x4_values.csv",
+      "handoff_file_sha256": "08ff823ba7ceb43f55454873589bd968e404a9b2cf378fe03b66e70e9c034d29",
+      "sha256": "9acf79bc9f6444825f7aff066cfecf6ee14a18284f2c93fbe969fa893acfe616"
+    },
+    {
+      "file": "fig3.c/fig3.c_scan.csv",
+      "handoff_file": "data/panel_c/dut3_reference_fit_residuals.csv",
+      "handoff_file_sha256": "33f03d527bfb5dc5202e2c14fc5847ebffdd5d7a461321223d23e144b2785f40",
+      "sha256": "33f03d527bfb5dc5202e2c14fc5847ebffdd5d7a461321223d23e144b2785f40"
+    },
+    {
+      "file": "fig3.c/fig3.c_dense_fits.csv",
+      "handoff_file": "data/panel_c/dense_fitted_curves.csv",
+      "handoff_file_sha256": "7a0c103fb14f6226a2dcb85e2bc5bbb68d40aab45e284beaf6b1fee400dec3db",
+      "sha256": "7a0c103fb14f6226a2dcb85e2bc5bbb68d40aab45e284beaf6b1fee400dec3db"
+    },
+    {
+      "file": "fig3.c/fig3.c_fit_parameters.csv",
+      "handoff_file": "data/panel_c/fit_parameters.csv",
+      "handoff_file_sha256": "a06e49f7aece458887ddab8d5ef1875bd7c64e370af61f12ce62b724b043cfbd",
+      "sha256": "a06e49f7aece458887ddab8d5ef1875bd7c64e370af61f12ce62b724b043cfbd"
+    },
+    {
+      "file": "fig3.c/fig3.c_complex_matrices.csv",
+      "handoff_file": "data/panel_c/complex_matrix_elements.csv",
+      "handoff_file_sha256": "8ef1d9b4cbbf3570f3bd1054aff6900cb6dc0ddae20331e75d8659f4362e24d2",
+      "sha256": "8ef1d9b4cbbf3570f3bd1054aff6900cb6dc0ddae20331e75d8659f4362e24d2"
+    }
+  ]
+}

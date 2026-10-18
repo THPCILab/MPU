@@ -145,9 +145,13 @@ training example, not the quick demo.
 ## Manuscript Source Data
 
 Numerical sources use manuscript panel names, for example
-`paper_data/fig5/fig5.c/` and `paper_data/fig4/fig4.c/`.
+`paper_data/fig3/fig3.a/`, `paper_data/fig3/fig3.b/`,
+`paper_data/fig3/fig3.c/`, `paper_data/fig4/fig4.c/` and
+`paper_data/fig5/fig5.c/`.
 `paper_data/Source_Data.xlsx` has one sheet per figure and matches the
 panel-labelled UTF-8 CSV files. See [coverage and provenance](paper_data/README.md).
+Fig3 contains final normalized operator comparisons and measured scan points,
+with model fits stored separately; see [Figure 3 data](paper_data/fig3/README.md).
 Fig4.c contains counts transcribed from the supplied figure; no sample-level
 predictions are reconstructed. Fig4.b curve sources are still being identified.
 
