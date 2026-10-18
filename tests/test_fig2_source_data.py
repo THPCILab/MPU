@@ -7,7 +7,7 @@ import unittest
 from tools.export_fig2_source_data import export, TABLES
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "paper_data/fig2"
+DATA = ROOT / "source_data/fig2"
 
 
 def records(relative):
@@ -16,11 +16,11 @@ def records(relative):
 
 
 class Figure2SourceTests(unittest.TestCase):
-    def test_paper_data_is_data_only(self):
-        for path in (ROOT / "paper_data").rglob("*"):
+    def test_source_data_is_data_only(self):
+        for path in (ROOT / "source_data").rglob("*"):
             if path.is_file():
                 self.assertTrue(path.suffix in {".csv", ".xlsx"} or
-                                path == ROOT / "paper_data/README.md", str(path))
+                                path == ROOT / "source_data/README.md", str(path))
 
     def test_exports_match_final_tables(self):
         with tempfile.TemporaryDirectory() as tmp:

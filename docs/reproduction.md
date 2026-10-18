@@ -2,17 +2,17 @@
 
 Installation, the offline demo and model retraining concern Figure 5.
 Figures 2–4 are supplied as final plotting tables in
-[`paper_data/`](../paper_data/README.md).
+[`source_data/`](../source_data/README.md).
 
 ## Panel mapping
 
 | Panel | Numerical input or code |
 | --- | --- |
 | 5a | Architecture schematic in the assembled `results/Fig5.pdf` |
-| 5b | Node-selection schematic; archived masks in `data/main_10pct_sweep.json` |
-| 5c | Continuous-sharing curves in `data/main_10pct_sweep.json` |
-| 5d | `data/fig5/quantization_runs.csv`, `nominal_runs/` and `device_runs/` |
-| 5e | 90%-sharing confusion matrices in `data/main_10pct_sweep.json` |
+| 5b | Node-selection schematic; archived masks in `reproduction_data/main_10pct_sweep.json` |
+| 5c | Continuous-sharing curves in `reproduction_data/main_10pct_sweep.json` |
+| 5d | `reproduction_data/fig5/quantization_runs.csv`, `nominal_runs/` and `device_runs/` |
+| 5e | 90%-sharing confusion matrices in `reproduction_data/main_10pct_sweep.json` |
 
 The supplied `results/Fig5.pdf` and `results/main_figure.png` are assembled
 publication artwork. Scripts regenerate numerical panels, not the manually
@@ -69,7 +69,7 @@ bash scripts/run_replicate_20pct_sweep.sh
 ```
 
 The archived main and replicate curves have separate warmup files
-(`data/warmup_main.json` and `data/warmup_replicate.json`).
+(`reproduction_data/warmup_main.json` and `reproduction_data/warmup_replicate.json`).
 New outputs are written under `results/`, not over the archived inputs.
 
 ## Finite-codebook and device-error study

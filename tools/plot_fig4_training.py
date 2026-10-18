@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "paper_data/fig4/fig4.b"
+DATA = ROOT / "source_data/fig4/fig4.b"
 OUTPUT = ROOT / "results/fig4_training"
 COLORS = ["#8c564b", "#9467bd", "#1f77b4", "#d62728"]
 
@@ -76,7 +76,7 @@ def save(fig, name):
 
 def validate():
     s, d = load_csv("fig4.b_single_task.csv"), load_csv("fig4.b_dual_task.csv")
-    raw = json.loads((ROOT / "data/fig4/fig4.b_training_history.json").read_text(encoding="utf-8"))
+    raw = json.loads((ROOT / "reproduction_data/fig4/fig4.b_training_history.json").read_text(encoding="utf-8"))
     assert all(len(values) == 300 and np.isfinite(values).all() for values in [*s.values(), *d.values()])
     np.testing.assert_array_equal(s["epoch"], np.arange(10, 3001, 10))
     np.testing.assert_array_equal(d["epoch"], s["epoch"])

@@ -254,7 +254,7 @@ def main() -> None:
     import engine as exp  # noqa: E402
 
     exp.ROOT = WORK_ROOT
-    cache_path = Path(os.environ.get("STATIC332_FEATURE_CACHE", str(REPO_ROOT / "data/fig5/replay/seed44_pca_features.pt")))
+    cache_path = Path(os.environ.get("STATIC332_FEATURE_CACHE", str(REPO_ROOT / "reproduction_data/fig5/replay/seed44_pca_features.pt")))
     if not forward_smoke and cache_path.is_file():
         from feature_cache import install as install_feature_cache
         install_feature_cache(exp, cache_path)

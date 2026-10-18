@@ -16,7 +16,7 @@ def write_csv(path, headers, rows):
 
 
 def export_fig4b(out):
-    history = json.loads((ROOT / "data/fig4/fig4.b_training_history.json").read_text(encoding="utf-8"))
+    history = json.loads((ROOT / "reproduction_data/fig4/fig4.b_training_history.json").read_text(encoding="utf-8"))
     names = [("mzi", "mzi_2layer_history"), ("mzi_3bit", "mzi_2layer_q3_history"),
              ("mpu", "dpu_history"), ("mpu_mzi", "dpu_mzi_single_history")]
     headers = ["epoch"]
@@ -42,11 +42,11 @@ def export_fig4b(out):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--out-dir", type=Path, default=ROOT / "paper_data")
+    parser.add_argument("--out-dir", type=Path, default=ROOT / "source_data")
     args = parser.parse_args()
     out = args.out_dir
     export_fig4b(out)
-    fig4 = json.loads((ROOT / "data/fig4/fig4.c_confusion_counts.json").read_text(encoding="utf-8"))
+    fig4 = json.loads((ROOT / "reproduction_data/fig4/fig4.c_confusion_counts.json").read_text(encoding="utf-8"))
     counts, summary = [], []
     for item in fig4["matrices"]:
         matrix = item["counts"]
@@ -64,7 +64,7 @@ def main():
               ["task", "split", "true_label", "predicted_label", "count"], counts)
     write_csv(out / "fig4/fig4.c/fig4.c_confusion_summary.csv",
               ["task", "split", "samples", "correct", "accuracy_percent", "displayed_accuracy_percent"], summary)
-    payload = json.loads((ROOT / "data/main_10pct_sweep.json").read_text(encoding="utf-8-sig"))
+    payload = json.loads((ROOT / "reproduction_data/main_10pct_sweep.json").read_text(encoding="utf-8-sig"))
     curves = payload["efficiency_conditions"]["eta_off"]["curves"]
     sharing = []
     for key in sorted(curves, key=float):

@@ -13,7 +13,7 @@ Figures 2–4 are supplied as final plotting data.
 | Expected outputs and runtime | README; generated `results/demo/demo_report.json` |
 | Figure 5 reproduction | [Protocols and commands](reproduction.md) |
 | Own-data instructions | [Feature-data example](custom_data.md) |
-| Numerical source data | [Figure-panel index](../paper_data/README.md) |
+| Numerical source data | [Figure-panel index](../source_data/README.md) |
 | License and support | MIT `LICENSE`, GitHub Issues |
 
 The CPU demo and regression tests run without private PCA caches, checkpoints

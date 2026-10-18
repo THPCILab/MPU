@@ -10,7 +10,7 @@ from figure_inputs import pattern_ratios, prepare_payload
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = "data/main_10pct_sweep.json"
+DEFAULT_INPUT = "reproduction_data/main_10pct_sweep.json"
 
 NODE = "#6F3FB5" #
 LAYER = "#2F5597"

@@ -126,8 +126,8 @@ confusion matrices
 The full warmup curves are stored in:
 
 ```text
-data/warmup_main.json
-data/warmup_replicate.json
+reproduction_data/warmup_main.json
+reproduction_data/warmup_replicate.json
 ```
 
 ## 7. Sharing Pattern Search
@@ -457,13 +457,13 @@ tools/export_figure_data.py
 Main result data:
 
 ```text
-data/main_10pct_sweep.json
-data/warmup_main.json
+reproduction_data/main_10pct_sweep.json
+reproduction_data/warmup_main.json
 ```
 
 Figure data package:
 
 ```text
-paper_data/
+source_data/
 ```
 

@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class RepositoryLayoutTests(unittest.TestCase):
     def test_documentation_links_resolve(self):
         checked = 0
-        for document in [ROOT / "README.md", ROOT / "paper_data/README.md",
+        for document in [ROOT / "README.md", ROOT / "source_data/README.md",
                          *sorted((ROOT / "docs").glob("*.md"))]:
             content = document.read_text(encoding="utf-8-sig")
             for target in re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", content):
@@ -20,15 +20,18 @@ class RepositoryLayoutTests(unittest.TestCase):
                                 str(document.relative_to(ROOT)) + ": " + target)
         self.assertGreater(checked, 10)
 
-    def test_generated_outputs_do_not_target_paper_data(self):
+    def test_generated_outputs_do_not_target_source_data(self):
         for script in ("run_main_10pct_sweep_reuse_warmup.sh", "run_replicate_20pct_sweep.sh"):
             text = (ROOT / "scripts" / script).read_text(encoding="utf-8")
-            self.assertNotIn("--out-dir paper_data", text)
+            self.assertNotIn("--out-dir source_data", text)
             self.assertIn("--out-dir results/generated/", text)
         self.assertIn("results/generated/", (ROOT / ".gitignore").read_text(encoding="utf-8"))
 
     def test_repository_scope_is_explicit(self):
         text = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertTrue((ROOT / "reproduction_data").is_dir())
+        self.assertTrue((ROOT / "source_data").is_dir())
+        self.assertIn("Use `reproduction_data/` as program inputs", text)
         self.assertIn("**Figure 5**", text)
         self.assertIn("**Figures 2–4**", text)
         self.assertIn("](results/MPU.png)", text)

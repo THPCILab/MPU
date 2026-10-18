@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Distinguish reproduction inputs (`reproduction_data/`) from publication tables (`source_data/`).
+
 - Add final plotting tables for manuscript Figures 2–4 and the source-data workbook.
 - Clarify that installation, demo and computational reproduction concern Figure 5.
 - Remove duplicate preview/MAT exports; generate them under ignored results directories.

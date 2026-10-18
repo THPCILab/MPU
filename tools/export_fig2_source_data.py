@@ -4,7 +4,7 @@ import csv
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "data/fig2/source_tables"
+SOURCE = ROOT / "reproduction_data/fig2/source_tables"
 TABLES = [
     ("theta_phi_plot_points.csv", "fig2.b/fig2.b_theta_phi.csv", [
         ("device_index", "device_index"), ("theta_index", "theta_target_code"),
@@ -41,6 +41,6 @@ def export(out):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--out-dir", type=Path, default=ROOT / "paper_data/fig2")
+    parser.add_argument("--out-dir", type=Path, default=ROOT / "source_data/fig2")
     export(parser.parse_args().out_dir)
 

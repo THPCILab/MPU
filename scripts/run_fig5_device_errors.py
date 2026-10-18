@@ -19,7 +19,7 @@ def main():
     work = ROOT / "results/quantization_training" / f"ratio{args.ratio}"
     library = work / "results_static332_t90pct"
     library.mkdir(parents=True, exist_ok=True)
-    source = ROOT / "data/fig5/device_runs/codebook_static_3bit_eps_2pow_minus332_losst90pct.npz"
+    source = ROOT / "reproduction_data/fig5/device_runs/codebook_static_3bit_eps_2pow_minus332_losst90pct.npz"
     shutil.copy2(source, library / source.name)
     env = dict(os.environ, STATIC332_WORK_ROOT=str(work),
                STATIC332_SOURCE_ROOT=str(ROOT / "tools/quantization"))

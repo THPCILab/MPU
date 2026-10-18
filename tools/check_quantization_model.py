@@ -12,7 +12,7 @@ import train_device_codebook as device
 
 def main():
     torch.set_num_threads(2)
-    with np.load(ROOT / "data/fig5/device_runs/codebook_static_3bit_eps_2pow_minus332_losst90pct.npz") as z:
+    with np.load(ROOT / "reproduction_data/fig5/device_runs/codebook_static_3bit_eps_2pow_minus332_losst90pct.npz") as z:
         library = z["matrices"]
     device.exp = engine
     device.install_library_forward(library)

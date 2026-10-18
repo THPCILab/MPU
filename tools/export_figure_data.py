@@ -9,7 +9,7 @@ from figure_inputs import pattern_ratios, prepare_payload
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INPUT = "data/main_10pct_sweep.json"
+DEFAULT_INPUT = "reproduction_data/main_10pct_sweep.json"
 DEFAULT_FIG_DIR = "results/generated/fig5"
 DEFAULT_OUT_DIR = "results/generated/fig5/source_data"
 

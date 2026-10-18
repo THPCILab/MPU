@@ -13,7 +13,7 @@ import pandas as pd
 from scipy.io import savemat
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "data/fig5"
+DATA = ROOT / "reproduction_data/fig5"
 ORDER = ["Continuous", "2-bit QAT", "3-bit QAT", "3-bit PTQ",
          "4-bit QAT", "5-bit QAT", "Measured-error simulation",
          "Library + MZI voltage error"]
@@ -96,7 +96,7 @@ def export(runs, summary, checked, out=None):
            "panel_d_sharing_percent": np.array([20, 40, 60, 80, 90]),
            "panel_d_accuracy_percent": means,
            "panel_d_sample_sd_percent": sd, "panel_d_training_seed_count": counts}
-    payload = json.loads((ROOT / "data/main_10pct_sweep.json").read_text(encoding="utf-8-sig"))
+    payload = json.loads((ROOT / "reproduction_data/main_10pct_sweep.json").read_text(encoding="utf-8-sig"))
     curves = payload["efficiency_conditions"]["eta_off"]["curves"]
     ratios = sorted(float(k) for k in curves)
     mat["panel_c_sharing_percent"] = np.array(ratios) * 100
@@ -112,7 +112,7 @@ def export(runs, summary, checked, out=None):
     for name, target in [("Fig5.pdf", "fig5.pdf"), ("main_figure.png", "fig5.png")]:
         shutil.copy2(ROOT / "results" / name, archive / target)
     hashes = dict(checked)
-    hashes["../main_10pct_sweep.json"] = hashlib.sha256((ROOT / "data/main_10pct_sweep.json").read_bytes()).hexdigest()
+    hashes["../main_10pct_sweep.json"] = hashlib.sha256((ROOT / "reproduction_data/main_10pct_sweep.json").read_bytes()).hexdigest()
     hashes["device_runs/codebook_static_3bit_eps_2pow_minus332_losst90pct.npz"] = hashlib.sha256((DATA / "device_runs/codebook_static_3bit_eps_2pow_minus332_losst90pct.npz").read_bytes()).hexdigest()
     (archive / "source_hashes.json").write_text(json.dumps(hashes, indent=2) + "\n", encoding="utf-8")
 

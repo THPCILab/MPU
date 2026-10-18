@@ -21,7 +21,7 @@ class Figure4TrainingTests(unittest.TestCase):
             for name in ("fig4.b_single_task.csv", "fig4.b_dual_task.csv"):
                 with (Path(tmp) / "fig4/fig4.b" / name).open(encoding="utf-8-sig", newline="") as stream:
                     regenerated = list(csv.reader(stream))
-                with (ROOT / "paper_data/fig4/fig4.b" / name).open(encoding="utf-8-sig", newline="") as stream:
+                with (ROOT / "source_data/fig4/fig4.b" / name).open(encoding="utf-8-sig", newline="") as stream:
                     supplied = list(csv.reader(stream))
                 self.assertEqual(regenerated, supplied)
 

@@ -100,16 +100,18 @@ train_mpu_pnn.py    Core multi-task model and node-selection training
 tools/             Quantization models, plotting and data export
 scripts/           Offline demo and training launchers
 examples/          Custom-feature training example
-data/              Archived numerical inputs and model parameters
-paper_data/        Final plotting tables and Source_Data.xlsx
+reproduction_data/  Run histories, codebooks and model/calibration inputs
+source_data/        Figure-ready CSV tables and Source_Data.xlsx
 results/           Publication figures; generated outputs are Git-ignored
 tests/             Regression and source-data checks
 docs/              Installation, method and reproduction details
 ```
 
 The executable installation, demo and reproduction pipeline covers **Figure 5**.
+Use `reproduction_data/` as program inputs and `source_data/` for the paper's
+figure values and journal Source Data submission.
 **Figures 2–4** are supplied as final plotting data, with a concise
-[panel index](paper_data/README.md). The Figure 5 device-error study uses a
+[panel index](source_data/README.md). The Figure 5 device-error study uses a
 prospective 90% MPU-transmission model; it is distinct from physical measurements.
 
 ## License, citation and support

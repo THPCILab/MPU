@@ -20,11 +20,11 @@ import plot_nature_figures as plots
 class FigureInputTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.main = json.loads((ROOT / "data/main_10pct_sweep.json").read_text(encoding="utf-8-sig"))
-        cls.replicate = json.loads((ROOT / "data/replicate_20pct_sweep.json").read_text(encoding="utf-8-sig"))
+        cls.main = json.loads((ROOT / "reproduction_data/main_10pct_sweep.json").read_text(encoding="utf-8-sig"))
+        cls.replicate = json.loads((ROOT / "reproduction_data/replicate_20pct_sweep.json").read_text(encoding="utf-8-sig"))
 
     def test_replicate_uses_its_own_warmup(self):
-        payload = figure_inputs.prepare_payload(self.replicate, ROOT / "data/replicate_20pct_sweep.json")
+        payload = figure_inputs.prepare_payload(self.replicate, ROOT / "reproduction_data/replicate_20pct_sweep.json")
         self.assertTrue(payload["efficiency_conditions"]["eta_off"]["warmup_source"].endswith("warmup_replicate.json"))
 
     def test_arbitrary_input_does_not_borrow_published_warmup(self):
@@ -33,10 +33,10 @@ class FigureInputTests(unittest.TestCase):
 
     def test_wrong_seed_warmup_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "seed"):
-            figure_inputs.prepare_payload(self.replicate, ROOT / "custom.json", ROOT / "data/warmup_main.json")
+            figure_inputs.prepare_payload(self.replicate, ROOT / "custom.json", ROOT / "reproduction_data/warmup_main.json")
 
     def test_replicate_without_90pct_plots_and_exports(self):
-        payload = figure_inputs.prepare_payload(self.replicate, ROOT / "data/replicate_20pct_sweep.json")
+        payload = figure_inputs.prepare_payload(self.replicate, ROOT / "reproduction_data/replicate_20pct_sweep.json")
         cond = exporter.condition(payload)
         with tempfile.TemporaryDirectory() as tmp, patch.object(plots, "save") as save:
             out = Path(tmp)

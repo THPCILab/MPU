@@ -6,13 +6,23 @@ from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[1] / "paper_data/fig3"
-METADATA = Path(__file__).resolve().parents[1] / "data/fig3/source_tables"
+ROOT = Path(__file__).resolve().parents[1] / "source_data/fig3"
+METADATA = Path(__file__).resolve().parents[1] / "reproduction_data/fig3/source_tables"
 
 
 def read_csv(relative):
     with (ROOT / relative).open(encoding="utf-8-sig", newline="") as stream:
         return list(csv.DictReader(stream))
+
+
+def matches_source_hash(path, expected):
+    content = path.read_bytes()
+    candidates = {content}
+    if path.suffix.lower() == ".csv":
+        # Git may check text out with LF or CRLF; all other bytes must match.
+        lf = content.replace(b"\r\n", b"\n")
+        candidates.update((lf, lf.replace(b"\n", b"\r\n")))
+    return any(hashlib.sha256(value).hexdigest() == expected for value in candidates)
 
 
 def validate():
@@ -75,7 +85,7 @@ def validate():
         np.testing.assert_allclose(abs(z)**2, float(row["power"]), atol=1e-12)
     provenance = json.loads((METADATA / "provenance.json").read_text(encoding="utf-8"))
     for record in provenance["files"]:
-        assert hashlib.sha256((ROOT / record["file"]).read_bytes()).hexdigest() == record["sha256"]
+        assert matches_source_hash(ROOT / record["file"], record["sha256"])
     print("PASS: Fig3.a/b final values; 84 measured currents; 2400 fitted values; 16 matrix elements; hashes.")
 
 

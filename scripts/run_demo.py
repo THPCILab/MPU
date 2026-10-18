@@ -18,7 +18,7 @@ def main():
     args = parser.parse_args()
     output = args.out_dir.resolve()
     output.mkdir(parents=True, exist_ok=True)
-    sources = sorted((ROOT / "data").rglob("*.json")) + sorted((ROOT / "data/fig5").rglob("*.csv")) + sorted((ROOT / "data/fig5").rglob("*.npz"))
+    sources = sorted((ROOT / "reproduction_data").rglob("*.json")) + sorted((ROOT / "reproduction_data/fig5").rglob("*.csv")) + sorted((ROOT / "reproduction_data/fig5").rglob("*.npz"))
     sources = [p for p in sources if "replay" not in p.parts]
     before = {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
     started = time.perf_counter()

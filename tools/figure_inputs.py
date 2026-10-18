@@ -29,8 +29,8 @@ def prepare_payload(payload, input_path, warmup_path=None):
         return payload
     if warmup_path is None:
         companions = {
-            (ROOT / "data/main_10pct_sweep.json").resolve(): ROOT / "data/warmup_main.json",
-            (ROOT / "data/replicate_20pct_sweep.json").resolve(): ROOT / "data/warmup_replicate.json",
+            (ROOT / "reproduction_data/main_10pct_sweep.json").resolve(): ROOT / "reproduction_data/warmup_main.json",
+            (ROOT / "reproduction_data/replicate_20pct_sweep.json").resolve(): ROOT / "reproduction_data/warmup_replicate.json",
         }
         warmup_path = companions.get(Path(input_path).resolve())
     if warmup_path is None:

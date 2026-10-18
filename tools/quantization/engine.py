@@ -68,8 +68,8 @@ def get_task_loaders(
     from torchvision import datasets
 
     specs = task_specs(task_set)
-    raw_train = datasets.EMNIST(root=str(ROOT / "data"), split="byclass", train=True, download=download)
-    raw_test = datasets.EMNIST(root=str(ROOT / "data"), split="byclass", train=False, download=download)
+    raw_train = datasets.EMNIST(root=str(ROOT / "reproduction_data"), split="byclass", train=True, download=download)
+    raw_test = datasets.EMNIST(root=str(ROOT / "reproduction_data"), split="byclass", train=False, download=download)
 
     train_data = {}
     test_data = {}

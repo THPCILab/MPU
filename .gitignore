@@ -5,14 +5,14 @@ __pycache__/
 venv/
 
 # Datasets and generated checkpoints
-data/EMNIST/
-data/emnist/
+reproduction_data/EMNIST/
+reproduction_data/emnist/
 results/*_ckpt/
 results/*_logs/
 results/*_shards/
 *.pt
 *.pth
-data/fig5/replay/
+reproduction_data/fig5/replay/
 results/quantization_training/
 
 # Local run artifacts
