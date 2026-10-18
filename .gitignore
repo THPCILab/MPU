@@ -19,6 +19,7 @@ results/quantization_training/
 results/local_*.json
 results/local_*/
 results/demo/
+results/fig4_training/
 results/custom_features/
 results/validation/
 .pytest_cache/

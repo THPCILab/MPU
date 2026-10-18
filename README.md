@@ -153,7 +153,9 @@ panel-labelled UTF-8 CSV files. See [coverage and provenance](paper_data/README.
 Fig3 contains final normalized operator comparisons and measured scan points,
 with model fits stored separately; see [Figure 3 data](paper_data/fig3/README.md).
 Fig4.c contains counts transcribed from the supplied figure; no sample-level
-predictions are reconstructed. Fig4.b curve sources are still being identified.
+predictions are reconstructed. [Fig4.b training curves](paper_data/fig4/fig4.b/README.md)
+include the supplied single-task and dual-task histories, with loss values and
+the original JSON arrays. Validate or redraw them using `tools/plot_fig4_training.py`.
 
 ## Method Summary
 

@@ -1,0 +1,34 @@
+{
+  "handoff_archive": "vowel_training_plot_handoff_20261018.zip",
+  "handoff_sha256": "ae6efd689f3124c5343fb6158038e6c13f1c202bf7921dc77d1af5bf096ea6d5",
+  "source_notebook": "vowel recognition myNN test.ipynb",
+  "source_notebook_sha256": "6afbe92bf55e917da2cfc0aa18b544b7401a0c32f3092a6a336161779d03073e",
+  "source_plot_cells_zero_based": {
+    "single_task": 140,
+    "dual_task": 139
+  },
+  "metric": "training-set accuracy",
+  "epoch": {
+    "first": 10,
+    "last": 3000,
+    "step": 10
+  },
+  "transforms": [
+    "epoch = 10 * (record_index + 1)",
+    "accuracy_percent = 100 * accuracy_fraction"
+  ],
+  "files": [
+    {
+      "file": "data/fig4/fig4.b_training_history.json",
+      "sha256": "91b288d2a0fac0da30d13b95f1f79bcb4ccddde1b41e7317400344edf6458f11"
+    },
+    {
+      "file": "paper_data/fig4/fig4.b/fig4.b_single_task.csv",
+      "sha256": "e3b2b00bc729370839ac8b498a12272a3101f52c92014656c00115a09d2f71d6"
+    },
+    {
+      "file": "paper_data/fig4/fig4.b/fig4.b_dual_task.csv",
+      "sha256": "6974c4cffaad211d8b88564fb09ab9fc16e2a1357620a671921b29fed00b2f63"
+    }
+  ]
+}

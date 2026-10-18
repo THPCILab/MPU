@@ -15,11 +15,37 @@ def write_csv(path, headers, rows):
         writer.writerows(rows)
 
 
+def export_fig4b(out):
+    history = json.loads((ROOT / "data/fig4/fig4.b_training_history.json").read_text(encoding="utf-8"))
+    names = [("mzi", "mzi_2layer_history"), ("mzi_3bit", "mzi_2layer_q3_history"),
+             ("mpu", "dpu_history"), ("mpu_mzi", "dpu_mzi_single_history")]
+    headers = ["epoch"]
+    for prefix, key in names:
+        assert len(history[key]["acc"]) == len(history[key]["loss"]) == 300
+        headers.extend([prefix + "_accuracy_percent", prefix + "_loss"])
+    single = []
+    dual = []
+    multi = history["dpu_mzi_multi_history"]
+    assert all(len(multi[field]) == 300 for field in ("acc1", "acc2", "loss1", "loss2"))
+    for index in range(300):
+        epoch = 10 * (index + 1)
+        row = [epoch]
+        for _, key in names:
+            row.extend([history[key]["acc"][index] * 100, history[key]["loss"][index]])
+        single.append(row)
+        dual.append([epoch, multi["acc1"][index] * 100, multi["acc2"][index] * 100,
+                     multi["loss1"][index], multi["loss2"][index]])
+    write_csv(out / "fig4/fig4.b/fig4.b_single_task.csv", headers, single)
+    write_csv(out / "fig4/fig4.b/fig4.b_dual_task.csv",
+              ["epoch", "task1_accuracy_percent", "task2_accuracy_percent", "task1_loss", "task2_loss"], dual)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out-dir", type=Path, default=ROOT / "paper_data")
     args = parser.parse_args()
     out = args.out_dir
+    export_fig4b(out)
     fig4 = json.loads((ROOT / "data/fig4/fig4.c_confusion_counts.json").read_text(encoding="utf-8"))
     counts, summary = [], []
     for item in fig4["matrices"]:
